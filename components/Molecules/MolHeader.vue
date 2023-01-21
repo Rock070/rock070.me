@@ -3,7 +3,7 @@ import { useToggle } from '@vueuse/core'
 import { Icon } from '@iconify/vue'
 import type { RouteLocationRaw } from 'vue-router'
 
-import { onMounted } from 'vue'
+import useToggleDarkMode from '~/composables/useToggleDarkMode'
 
 interface Menu {
   type: 'text' | 'icon'
@@ -12,38 +12,22 @@ interface Menu {
   external?: boolean
   icon?: string
 }
-
-const [isDark, useToggleDark] = useToggle(true)
-
-const toggleDarkClass = (val: boolean) => {
-  const root = document.querySelector('html')
-  if (!root)
-    return
-  if (val) {
-    root?.classList.add('dark')
-    return
-  }
-  root?.classList.remove('dark')
-}
-
-onMounted(() => {
-  toggleDarkClass(isDark.value)
-})
-
-const onClickButton = () => {
-  useToggleDark(!isDark.value)
-  toggleDarkClass(isDark.value)
-}
-
-const themeModeIcon = computed(() =>
-  isDark.value ? 'ri:sun-line' : 'ri:moon-fill',
-)
+const {
+  iconName,
+  isDark,
+  toggleDark,
+} = useToggleDarkMode()
 
 const menus: Menu[] = [
   {
     name: 'Posts',
     type: 'text',
     to: '/posts',
+  },
+  {
+    name: 'Categories',
+    type: 'text',
+    to: '/categories',
   },
   {
     name: 'GitHub',
@@ -87,8 +71,8 @@ const menus: Menu[] = [
         </li>
 
         <li>
-          <button type="button" @click="onClickButton">
-            <Icon class="w-6 h-6" :class="isDark ? 'text-white' : 'text-balck'" :icon="themeModeIcon" />
+          <button type="button" @click="toggleDark">
+            <Icon class="w-6 h-6" :class="isDark ? 'text-white' : 'text-balck'" :icon="iconName" />
           </button>
         </li>
       </ul>
