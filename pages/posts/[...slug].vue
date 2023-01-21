@@ -1,34 +1,24 @@
 <script setup lang="ts">
-import { useToggle } from '@vueuse/core'
-import { onMounted } from 'vue'
-const [isDark, useToggleDark] = useToggle(true)
+import { useRoute } from 'vue-router'
 
-const toggleDarkClass = (val: boolean) => {
-  const root = document.querySelector('html')
-  if (!root)
-    return
-  if (val) {
-    root?.classList.add('dark')
-    return
-  }
-  root?.classList.remove('dark')
-}
+import useQueryPathGetPublishedPost from '~/service/useQueryPathGetPublishedPost'
+const route = useRoute()
 
-onMounted(() => {
-  toggleDarkClass(isDark.value)
-})
-
-const onClickButton = () => {
-  useToggleDark(!isDark.value)
-  toggleDarkClass(isDark.value)
-}
+const { data: article } = useQueryPathGetPublishedPost(route.path)
 </script>
 
 <template>
-  <main class="min-h-100vh dark:bg-black dark:text-white">
-    <button @click="onClickButton">
-      {{ isDark ? 'light' : 'dark' }} mode
-    </button>
-    <ContentDoc />
-  </main>
+  <div class="inline-block mb-10">
+    <h1 class="font-bold text-4xl">
+      {{ article?.title }}
+    </h1>
+    <span class="flex justify-center items-center space-x-2 text-sm opacity-60">
+      <time class="whitespace-nowrap min-w-70px"> {{ article?.date }} </time>
+      <span>-</span>
+      <span class="whitespace-nowrap">{{ article?.durations }} min read</span>
+    </span>
+  </div>
+  <article v-if="article">
+    <ContentRenderer class="prose min-w-80vw lg:min-w-70vw break-all" :value="article" />
+  </article>
 </template>

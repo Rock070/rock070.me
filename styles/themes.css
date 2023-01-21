@@ -19,3 +19,17 @@ a {
 :root.dark a {
   color: white;
 }
+
+blockquote {
+  position: relative;
+}
+
+blockquote::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  background-color:  grey;
+  height: 100%;
+  width: 5px;
+}

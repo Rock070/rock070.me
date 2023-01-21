@@ -18,8 +18,8 @@ const transform = (data: useGetAllPublishedPostsData[]) => {
 
   return entries
     .sort(([a], [b]) => {
-      const numA = Number(a)
-      const numB = Number(b)
+      const [numA, numB] = [Number(a), Number(b)]
+
       if (Number.isNaN(numA) || Number.isNaN(numB))
         return 0
       return numB - numA

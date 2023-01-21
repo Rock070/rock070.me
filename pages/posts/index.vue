@@ -2,18 +2,6 @@
 import useGetAllPublishedPosts from '~/service/useGetAllPublishedPosts'
 
 const { data: articles } = useGetAllPublishedPosts()
-
-// const context = computed(() => {
-//   let result = null
-//   contentQuery.where({ _path: { $eq: route.path } }).find().then((res) => {
-//     result = res?.[0]
-//     console.log(result)
-
-//     return res
-//   })
-
-//   return result
-// })
 </script>
 
 <template>
