@@ -1,58 +1,7 @@
 <script setup lang="ts">
-import type { MarkdownParsedContent } from '@nuxt/content/dist/runtime/types'
+import useGetAllPublishedPosts from '~/service/useGetAllPublishedPosts'
 
-import isValidateDate from '~/utils/isValidaDate'
-import group from '~/utils/group'
-import getReadingTime from '~/helpers/getReadingTime'
-
-const options: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric',
-}
-
-const dateFormat = (date: string) => {
-  const target = new Date(date)
-  const ok = isValidateDate(new Date(date))
-  return ok ? target.toLocaleDateString('en', options) : ''
-}
-
-const contentQuery = queryContent()
-
-const getAllPublishedPosts = () => contentQuery.find().then((res) => {
-  const posts = res.filter(item => !item.draft).filter(item => item._path && /^\/posts/.test(item._path))
-
-  return posts as MarkdownParsedContent[]
-})
-
-const { data: articles } = useAsyncData(getAllPublishedPosts, {
-  default: () => [],
-  transform: (res) => {
-    if (!res)
-      return []
-
-    const groupPost = group(res, current => new Date(current.date).getFullYear() || '')
-
-    const entries = Object.entries(groupPost)
-
-    return entries
-      .sort(([y1], [y2]) => Number(y2) - Number(y1)) // 2023 往前靠
-      .map(([y, g]) => {
-        return {
-          year: y,
-          list: g.map((i) => {
-            const readingTime = getReadingTime(i.body)
-
-            return {
-              ...i,
-              durations: readingTime.minutes,
-              date: dateFormat(i.date),
-            }
-          }),
-        }
-      })
-  },
-})
+const { data: articles } = useGetAllPublishedPosts()
 
 // const context = computed(() => {
 //   let result = null
