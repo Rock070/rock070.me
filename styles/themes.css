@@ -1,12 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 :root {
-  @apply bg-white;
-  @apply text-black;
   font-family: Inter,ui-sans-serif,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
 }
 
-/* :root.dark {
-  @apply text-white;
-  @apply bg-black;
-} */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+a {
+  cursor: pointer;
+  color: initial;
+}
+
+:root.dark a {
+  color: white;
+}
