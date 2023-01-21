@@ -33,3 +33,7 @@ blockquote::before{
   height: 100%;
   width: 5px;
 }
+
+.prose {
+  max-width: 65vw !important;
+}
