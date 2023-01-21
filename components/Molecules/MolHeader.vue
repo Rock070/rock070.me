@@ -78,7 +78,7 @@ const menus: Menu[] = [
       </nuxt-link>
     </div>
     <nav>
-      <ul class="basis-60% flex justify-end items-center space-x-4 grow-0">
+      <ul class="basis-60% flex justify-end items-start space-x-4 grow-0">
         <li v-for="menu in menus" :key="menu.name">
           <nuxt-link :to="menu.to" :external="menu.external">
             <span v-if="menu.type === 'text'">{{ menu.name }}</span>

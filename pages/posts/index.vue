@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-
 import type { MarkdownParsedContent } from '@nuxt/content/dist/runtime/types'
 
 import isValidateDate from '~/utils/isValidaDate'
 import group from '~/utils/group'
+import getReadingTime from '~/helpers/getReadingTime'
+
 const options: Intl.DateTimeFormatOptions = {
   year: 'numeric',
   month: 'short',
@@ -36,12 +36,16 @@ const { data: articles } = useAsyncData(getAllPublishedPosts, {
     const entries = Object.entries(groupPost)
 
     return entries
+      .sort(([y1], [y2]) => Number(y2) - Number(y1)) // 2023 往前靠
       .map(([y, g]) => {
         return {
           year: y,
           list: g.map((i) => {
+            const readingTime = getReadingTime(i.body)
+
             return {
               ...i,
+              durations: readingTime.minutes,
               date: dateFormat(i.date),
             }
           }),
@@ -84,7 +88,7 @@ const { data: articles } = useAsyncData(getAllPublishedPosts, {
                 <span class="flex justify-start items-center space-x-2 text-xs">
                   <time class="whitespace-nowrap min-w-70px"> {{ item.date }} </time>
                   <span>-</span>
-                  <span class="whitespace-nowrap">12 min</span>
+                  <span class="whitespace-nowrap">{{ item.durations }} min read</span>
                   <span>-</span>
                   <span class="text-sm">{{ item.description }}</span>
                 </span>
