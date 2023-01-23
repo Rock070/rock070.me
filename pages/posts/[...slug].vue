@@ -1,8 +1,43 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-
+import { useContent } from '#imports'
 import useQueryPathGetPublishedPost from '~/service/useQueryPathGetPublishedPost'
 import DocumentDrivenNotFound from '~/components/DocumentDrivenNotFound.vue'
+
+const content = await useContent()
+
+const { page } = content
+
+const SEOMeta = computed(() => {
+  return [
+    {
+      property: 'og:title',
+      content: page?.value?.title,
+    },
+    {
+      property: 'og:url',
+      content: location.origin + page?.value?._path,
+    },
+    {
+      property: 'og:description',
+      content: page?.value?.description,
+    },
+    {
+      name: 'twitter:description',
+      content: page?.value?.description,
+    },
+    {
+      name: 'twitter:title',
+      content: page?.value?.title,
+    },
+  ]
+})
+
+useHead({
+  meta: SEOMeta,
+})
+
+useContentHead(page)
 
 const route = useRoute()
 
