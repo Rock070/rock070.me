@@ -1,29 +1,33 @@
 <script setup lang="ts">
 import useGetAllPublishedPosts from '~/service/useGetAllPublishedPosts'
 
+import { useContent, useContentHead, useRequestEvent } from '#imports'
+
+const { navigation, page, surround, globals } = useContent()
+
 const { data: articles } = useGetAllPublishedPosts()
 </script>
 
 <template>
-  <div class="prose min-w-60vw lg:min-w-70vw">
+  <div class="prose min-w-70vw">
     <h1 class="mb-15 lg:mb-30 text-left font-extrabold">
       Posts
     </h1>
 
     <section class="space-y-30">
       <div v-for="article in articles" :key="article.year" class="relative">
-        <h2 class="absolute top--9.5 lg:top--16.5 left--5 m-0 text-8xl lg:text-9xl font-bold opacity-15">
+        <h2 class="absolute top--7.5 lg:top--16.5 left--4.5 lg:left--8 m-0 text-6xl lg:text-9xl font-bold opacity-15">
           {{ article.year }}
         </h2>
 
-        <ul class="not-prose space-y-4 lg:space-y-12 px-5">
+        <ul class="not-prose space-y-4 lg:space-y-12 lg:px-3">
           <li v-for="item in article.list" :key="item._path" class="group">
             <NuxtLink :to="item._path">
               <strong class="font-bold text-xl opacity-80 group-hover:opacity-90">{{ item.title }}</strong>
               <br>
               <div class="inline-block opacity-50 group-hover:opacity-80">
                 <span class="flex justify-start items-center space-x-2 text-xs">
-                  <time class="whitespace-nowrap min-w-70px"> {{ item.date }} </time>
+                  <time :datetime="item.date" class="whitespace-nowrap min-w-70px"> {{ item.date_format }} </time>
                   <span>-</span>
                   <span class="whitespace-nowrap">{{ item.durations }} min read</span>
                   <span>-</span>
