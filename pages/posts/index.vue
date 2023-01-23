@@ -16,7 +16,7 @@ const { data: articles } = useGetAllPublishedPosts()
 
     <section class="space-y-30">
       <div v-for="article in articles" :key="article.year" class="relative">
-        <h2 class="absolute top--7.5 lg:top--16.5 left--4.5 lg:left--8 m-0 text-6xl lg:text-9xl font-bold opacity-15">
+        <h2 class="absolute top--7.5 lg:top--16.5 left--4.5 lg:left--6.5 m-0 text-6xl lg:text-9xl font-bold opacity-15">
           {{ article.year }}
         </h2>
 

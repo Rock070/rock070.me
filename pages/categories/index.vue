@@ -65,7 +65,7 @@ const displayArticles = computed(() => {
 
 <style>
 .badge--unactive {
-  @apply opacity-70 dark:opacity-100 hover:filter-none hover:opacity-100;
+  @apply opacity-70 dark:opacity-100 active:filter-none active:opacity-100;
   filter: grayscale(100%);
 }
 </style>
