@@ -1,14 +1,10 @@
-import type { MarkdownParsedContent } from '@nuxt/content/dist/runtime/types'
+import type { MyCustomParsedContent } from '~/types/query'
 import getReadingTime from '~/helpers/getReadingTime'
 
 import group from '~/utils/group'
 import dateFormatter from '~/utils/dateFormatter'
 
-interface useGetAllPublishedPostsData extends MarkdownParsedContent {
-  date: string
-}
-
-const transform = (data: useGetAllPublishedPostsData[]) => {
+const transform = (data: MyCustomParsedContent[]) => {
   if (!data)
     return []
 
@@ -33,7 +29,8 @@ const transform = (data: useGetAllPublishedPostsData[]) => {
           return {
             ...i,
             durations: readingTime.minutes,
-            date: dateFormatter(new Date(i.date)),
+            date_iso_string: new Date(i.date).toISOString(),
+            date_format: dateFormatter(new Date(i.date)),
           }
         }),
       }
@@ -41,11 +38,11 @@ const transform = (data: useGetAllPublishedPostsData[]) => {
 }
 
 const useGetAllPublishedPosts = () => {
-  const contentQuery = queryContent()
+  const contentQuery = queryContent('/posts')
   const getAllPublishedPosts = () => contentQuery.find().then((res) => {
-    const posts = res.filter(item => !item.draft).filter(item => item._path && /^\/posts/.test(item._path))
+    const posts = res.filter(item => !item.draft)
 
-    return posts as useGetAllPublishedPostsData[]
+    return posts as MyCustomParsedContent[]
   })
   return useAsyncData(getAllPublishedPosts, {
     default: () => [],
