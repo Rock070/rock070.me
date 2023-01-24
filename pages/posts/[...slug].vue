@@ -19,6 +19,11 @@ const SEOMeta = computed(() => {
       content: location.origin + page?.value?._path,
     },
     {
+      property: 'og:image',
+      content: `og:${location.origin}/${page?.value?.title}.png`,
+    },
+
+    {
       property: 'og:description',
       content: page?.value?.description,
     },
@@ -29,6 +34,10 @@ const SEOMeta = computed(() => {
     {
       name: 'twitter:title',
       content: page?.value?.title,
+    },
+    {
+      name: 'twitter:image:src',
+      content: `og:${location.origin}/${page?.value?.title}.png`,
     },
   ]
 })
