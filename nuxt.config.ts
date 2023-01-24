@@ -59,14 +59,6 @@ export default defineNuxtConfig({
           content: '',
         },
         {
-          property: 'og:image:width',
-          content: '1200',
-        },
-        {
-          property: 'og:image:height',
-          content: '628',
-        },
-        {
           property: 'og:type',
           content: 'website',
         },
