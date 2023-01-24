@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { useContent } from '#imports'
+import { useContent, useRuntimeConfig } from '#imports'
 import useQueryPathGetPublishedPost from '~/service/useQueryPathGetPublishedPost'
 import DocumentDrivenNotFound from '~/components/DocumentDrivenNotFound.vue'
 
 const content = await useContent()
+
+const config = useRuntimeConfig()
 
 const { page } = content
 
@@ -16,11 +18,11 @@ const SEOMeta = computed(() => {
     },
     {
       property: 'og:url',
-      content: location.origin + page?.value?._path,
+      content: config.public.baseUrl + page?.value?._path,
     },
     {
       property: 'og:image',
-      content: `${location.origin}/og-${page?.value?.title}.png`,
+      content: `${config.public.baseUrl}/og-${page?.value?.title}.png`,
     },
 
     {
@@ -37,7 +39,7 @@ const SEOMeta = computed(() => {
     },
     {
       name: 'twitter:image:src',
-      content: `${location.origin}/og-${page?.value?.title}.png`,
+      content: `${config.public.baseUrl}/og-${page?.value?.title}.png`,
     },
   ]
 })

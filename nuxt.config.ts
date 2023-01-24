@@ -8,7 +8,14 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@unocss/nuxt',
   ],
-  ssr: false,
+
+  runtimeConfig: {
+
+    // Public keys that are exposed to the client
+    public: {
+      baseUrl: process.env.BASE_URL,
+    },
+  },
   css: [
     '@unocss/reset/tailwind.css',
     '~/styles/themes.css',
