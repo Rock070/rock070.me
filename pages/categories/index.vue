@@ -25,7 +25,7 @@ const displayArticles = computed(() => {
     <h1 class="mb-5 text-left font-extrabold">
       Categories
     </h1>
-    <ul class="not-prose inline-flex mb-24 space-x-4">
+    <ul class="not-prose flex flex-wrap mb-24 children:mx-1 children:my-2">
       <li v-for="t in displayTags" :key="t.label">
         <button type="button" @click="toggle(t.label)">
           <Badge class="badge" :class="{ 'badge--unactive': !t.active }">
