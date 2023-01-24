@@ -37,7 +37,7 @@ async function generateSVG(meta: BlogPost, output: string) {
   const svg = ogSVg.replace(/\{\{([^}]+)}}/g, (_, name: keyof typeof data) => data[name])
 
   await sharp(Buffer.from(svg))
-    .resize(1200 * 1.1, 630 * 1.1)
+    .resize(950 * 1.1, 500 * 1.1)
     .png()
     .toFile(output)
 }
