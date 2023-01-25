@@ -24,8 +24,8 @@ useSeoMeta({
   twitterDescription: page?.value?.description,
 
   // image
-  ogImage: `${config.public.baseUrl}/og-${encodeURI(page?.value?.title)}.png`,
-  twitterImage: `${config.public.baseUrl}/og-${encodeURI(page?.value?.title)}.png`,
+  ogImage: `${config.public.baseUrl}/og-images/og-${encodeURI(page?.value?.title)}.png`,
+  twitterImage: `${config.public.baseUrl}/og-images/og-${encodeURI(page?.value?.title)}.png`,
   twitterCard: 'summary_large_image',
 })
 

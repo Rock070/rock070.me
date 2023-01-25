@@ -42,11 +42,11 @@ async function generateSVG(meta: BlogPost, output: string) {
     .toFile(output)
 }
 
-const DIST_PATH = resolve(__dirname, '../public')
+const DIST_PATH = resolve(__dirname, '../public/og-images')
+const POSTS_PATH = 'content/posts/**/*.md'
 
 const getAllPostMeta = async () => {
-  const ALL_PATH = 'content/**/*.md'
-  const posts = await fg(ALL_PATH).then(async (res) => {
+  const posts = await fg(POSTS_PATH).then(async (res) => {
     const p = res.map(async (p) => {
       return await fs.readFile(p, 'utf-8').then((c) => {
         const frontmatter = fm(c).frontmatter
@@ -65,12 +65,17 @@ const getAllPostMeta = async () => {
 
 export async function main() {
   const postsMeta = await getAllPostMeta()
+  fs.rmSync(DIST_PATH, { recursive: true, force: true })
+  fs.mkdirSync(DIST_PATH)
 
   await Promise.all(postsMeta.map(async (meta) => {
-    const fileName = `${DIST_PATH}/og-${meta?.title ?? ''}.png`
-    await fs.writeFile(fileName, '')
+    if (meta?.title) {
+      const fileName = `${DIST_PATH}/og-${meta?.title ?? ''}.png`
 
-    await generateSVG(meta, fileName)
+      await fs.writeFile(fileName, '')
+
+      await generateSVG(meta, fileName)
+    }
   }))
 }
 

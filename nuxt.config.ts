@@ -30,6 +30,10 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      title: 'rock070.me',
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+      ],
       meta: [
         {
           name: 'viewport',
