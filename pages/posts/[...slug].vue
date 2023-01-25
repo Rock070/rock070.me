@@ -30,6 +30,10 @@ const SEOMeta = computed(() => {
       content: page?.value?.description,
     },
     {
+      name: 'twitter:site',
+      content: config.public.baseUrl + page?.value?._path,
+    },
+    {
       name: 'twitter:description',
       content: page?.value?.description,
     },
@@ -38,7 +42,7 @@ const SEOMeta = computed(() => {
       content: page?.value?.title,
     },
     {
-      name: 'twitter:image:src',
+      name: 'twitter:image',
       content: `${config.public.baseUrl}/og-${page?.value?.title}.png`,
     },
   ]

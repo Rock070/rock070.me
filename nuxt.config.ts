@@ -10,7 +10,6 @@ export default defineNuxtConfig({
   ],
 
   runtimeConfig: {
-
     // Public keys that are exposed to the client
     public: {
       baseUrl: process.env.BASE_URL,
@@ -76,6 +75,10 @@ export default defineNuxtConfig({
         },
         {
           name: 'twitter:site',
+          content: process.env.BASE_URL,
+        },
+        {
+          name: 'twitter:creator',
           content: '@Rock070000',
         },
         {
