@@ -10,46 +10,16 @@ const config = useRuntimeConfig()
 
 const { page } = content
 
-const SEOMeta = computed(() => {
-  return [
-    {
-      property: 'og:title',
-      content: page?.value?.title,
-    },
-    {
-      property: 'og:url',
-      content: config.public.baseUrl + page?.value?._path,
-    },
-    {
-      property: 'og:image',
-      content: `${config.public.baseUrl}/og-${page?.value?.title}.png`,
-    },
-
-    {
-      property: 'og:description',
-      content: page?.value?.description,
-    },
-    {
-      name: 'twitter:site',
-      content: config.public.baseUrl + page?.value?._path,
-    },
-    {
-      name: 'twitter:description',
-      content: page?.value?.description,
-    },
-    {
-      name: 'twitter:title',
-      content: page?.value?.title,
-    },
-    {
-      name: 'twitter:image',
-      content: `${config.public.baseUrl}/og-${page?.value?.title}.png`,
-    },
-  ]
-})
-
-useHead({
-  meta: SEOMeta,
+useSeoMeta({
+  ogTitle: page?.value?.title,
+  ogUrl: config.public.baseUrl + page?.value?._path,
+  ogImage: `${config.public.baseUrl}/og-${page?.value?.title}.png`,
+  ogDescription: page?.value?.description,
+  twitterSite: config.public.baseUrl + page?.value?._path,
+  twitterDescription: page?.value?.description,
+  twitterTitle: page?.value?.title,
+  twitterImage: `${config.public.baseUrl}/og-${page?.value?.title}.png`,
+  twitterCard: 'summary_large_image',
 })
 
 useContentHead(page)
