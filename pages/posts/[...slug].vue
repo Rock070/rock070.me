@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 import { useContent, useRuntimeConfig } from '#imports'
 import useQueryPathGetPublishedPost from '~/service/useQueryPathGetPublishedPost'
-import OrgDocumentDrivenNotFound from '~/components/Organisms/OrgDocumentDrivenNotFound.vue.js'
+import OrgDocumentDrivenNotFound from '~/components/Organisms/OrgDocumentDrivenNotFound.vue'
 
 const content = await useContent()
 
@@ -61,5 +61,5 @@ const display = computed(() =>
     </article>
   </div>
   <!-- TODO: skeleton -->
-  <!-- <OrgDocumentDrivenNotFound v-else /> -->
+  <OrgDocumentDrivenNotFound v-else-if="!pending && !article" />
 </template>
