@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 import { useContent, useRuntimeConfig } from '#imports'
 import useQueryPathGetPublishedPost from '~/service/useQueryPathGetPublishedPost'
-import DocumentDrivenNotFound from '~/components/DocumentDrivenNotFound.vue'
+import OrgDocumentDrivenNotFound from '~/components/Organisms/OrgDocumentDrivenNotFound.vue.js'
 
 const content = await useContent()
 
@@ -33,7 +33,7 @@ useContentHead(page)
 
 const route = useRoute()
 
-const { data: article } = useQueryPathGetPublishedPost(route.path)
+const { data: article, pending } = useQueryPathGetPublishedPost(route.path)
 
 const display = computed(() =>
   ({
@@ -47,7 +47,7 @@ const display = computed(() =>
 </script>
 
 <template>
-  <div v-if="article" class="inline-block mb-6 lg:mb-10">
+  <div v-if="!pending && article" class="inline-block mb-6 lg:mb-10">
     <h1 class="font-bold text-2xl lg:text-4xl text-center">
       {{ article?.title }}
     </h1>
@@ -60,5 +60,6 @@ const display = computed(() =>
       <ContentRenderer :value="display" />
     </article>
   </div>
-  <DocumentDrivenNotFound v-else />
+  <!-- TODO: skeleton -->
+  <!-- <OrgDocumentDrivenNotFound v-else /> -->
 </template>
