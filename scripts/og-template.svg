@@ -1,11 +1,11 @@
-<svg width="1200" height="630" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="1200" height="700" fill="white"/>
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="1200" height="630" fill="white"/>
 <rect x="990" y="35" width="172.34" height="180" fill="url(#pattern0)"/>
 <text fill="#413F3F" xml:space="preserve" style="white-space: pre;" font-family="Fira Code" font-size="50" letter-spacing="0em">
-  <tspan x="958" y="578">Rock070</tspan>
+  <tspan x="958" y="530">Rock070</tspan>
 </text>
 <text fill="#807D7D" xml:space="preserve" style="white-space: pre;" font-family="Fira Code" font-size="30" letter-spacing="0em">
-  <tspan x="720" y="620">Frontend Engineer from Taiwan</tspan>
+  <tspan x="737" y="570">Frontend Engineer from Taiwan</tspan>
 </text>
 <text fill="#373435" xml:space="preserve" style="white-space: pre" font-family="Fira Code" font-size="40" letter-spacing="0em">
   <tspan x="128" y="285">{{title}}</tspan>
@@ -16,7 +16,7 @@
   <tspan x="130" y="400">{{description2}}&#10;</tspan>
   <tspan x="130" y="430">{{description3}}&#10;</tspan>
 </text>
-<rect y="680" width="1200" height="20" fill="#2F7BC1"/>
+<rect y="610" width="1200" height="20" fill="#2F7BC1"/>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_4_52" transform="translate(-0.0120929) scale(0.00225096 0.00215517)"/>
