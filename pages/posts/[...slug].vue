@@ -11,14 +11,21 @@ const config = useRuntimeConfig()
 const { page } = content
 
 useSeoMeta({
+  // title
   ogTitle: page?.value?.title,
-  ogUrl: config.public.baseUrl + page?.value?._path,
-  ogImage: `${config.public.baseUrl}/og-${page?.value?.title}.png`,
-  ogDescription: page?.value?.description,
-  twitterSite: config.public.baseUrl + page?.value?._path,
-  twitterDescription: page?.value?.description,
   twitterTitle: page?.value?.title,
-  twitterImage: `${config.public.baseUrl}/og-${page?.value?.title}.png`,
+
+  // url
+  ogUrl: config.public.baseUrl + page?.value?._path,
+  twitterSite: config.public.baseUrl + page?.value?._path,
+
+  // description
+  ogDescription: page?.value?.description,
+  twitterDescription: page?.value?.description,
+
+  // image
+  ogImage: `${config.public.baseUrl}/og-${encodeURI(page?.value?.title)}.png`,
+  twitterImage: `${config.public.baseUrl}/og-${encodeURI(page?.value?.title)}.png`,
   twitterCard: 'summary_large_image',
 })
 
