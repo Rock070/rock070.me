@@ -1,7 +1,12 @@
 <script setup lang="ts">
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import useGetAllPublishedPosts from '~/service/useGetAllPublishedPosts'
 
 import { useContent, useContentHead, useRequestEvent } from '#imports'
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const isMobile = breakpoints.isSmaller('md')
 
 const { navigation, page, surround, globals } = useContent()
 
@@ -25,15 +30,28 @@ const { data: articles } = useGetAllPublishedPosts()
             <NuxtLink :to="item._path">
               <strong class="font-bold text-xl opacity-80 group-hover:opacity-90">{{ item.title }}</strong>
               <br>
-              <div class="inline-block opacity-50 group-hover:opacity-80">
-                <span class="flex justify-start items-center space-x-2 text-xs">
-                  <time :datetime="item.date" class="whitespace-nowrap min-w-70px"> {{ item.date_format }} </time>
-                  <span>-</span>
-                  <span class="whitespace-nowrap">{{ item.durations }} min read</span>
-                  <span>-</span>
-                  <span class="text-sm">{{ item.description }}</span>
-                </span>
-              </div>
+              <ClientOnly>
+                <div v-if="isMobile" class="inline-block opacity-50 group-hover:opacity-80 space-y-1">
+                  <div class="flex justify-start items-center space-x-2 text-xs">
+                    <time :datetime="item.date" class="whitespace-nowrap min-w-70px"> {{ item.date_format }} </time>
+                    <span>-</span>
+                    <span class="whitespace-nowrap">{{ item.durations }} min read</span>
+                    <span>-</span>
+                  </div>
+                  <div class="text-sm">
+                    {{ item.description }}
+                  </div>
+                </div>
+                <div v-else class="inline-block opacity-50 group-hover:opacity-80">
+                  <span class="flex justify-start items-center space-x-2 text-xs">
+                    <time :datetime="item.date" class="whitespace-nowrap min-w-70px"> {{ item.date_format }} </time>
+                    <span>-</span>
+                    <span class="whitespace-nowrap">{{ item.durations }} min read</span>
+                    <span>-</span>
+                    <span class="text-sm">{{ item.description }}</span>
+                  </span>
+                </div>
+              </ClientOnly>
             </NuxtLink>
           </li>
         </ul>

@@ -51,7 +51,7 @@ const displayArticles = computed(() => {
               <strong class="font-bold text-xl opacity-80 group-hover:opacity-90">{{ item.title }}</strong>
               <br>
               <ClientOnly>
-                <div v-if="isMobile" class="inline-block opacity-50 group-hover:opacity-80 space-y-2">
+                <div v-if="isMobile" class="inline-block opacity-50 group-hover:opacity-80 space-y-1">
                   <div class="flex justify-start items-center space-x-2 text-xs">
                     <time :datetime="item.date" class="whitespace-nowrap min-w-70px"> {{ item.date_format }} </time>
                     <span>-</span>
