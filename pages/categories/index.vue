@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import useGetAllPublishedCategoriesPosts from '~/service/useGetAllPublishedCategoriesPosts'
 import useArray from '~/composables/useArray'
 
 const { data: articles } = await useGetAllPublishedCategoriesPosts()
+const breakpoints = useBreakpoints(breakpointsTailwind)
+
+const isMobile = breakpoints.isSmaller('md')
 
 const tags = computed(() => articles.value?.map(a => a.category) ?? [])
 
@@ -41,20 +45,32 @@ const displayArticles = computed(() => {
           {{ article.category }}
         </h2>
 
-        <ul class="not-prose space-y-4 lg:space-y-12 lg:px-3 border-l border-gray-400 dark:border-gray-300">
+        <ul class="not-prose space-y-4 lg:space-y-12 lg:px-3 border-l border-gray-400 dark:border-gray-300 pl-4">
           <li v-for="item in article.list" :key="item._path" class="group">
             <NuxtLink :to="item._path">
               <strong class="font-bold text-xl opacity-80 group-hover:opacity-90">{{ item.title }}</strong>
               <br>
-              <div class="inline-block opacity-50 group-hover:opacity-80">
-                <span class="flex justify-start items-center space-x-2 text-xs">
-                  <time :datetime="item.date" class="whitespace-nowrap min-w-70px"> {{ item.date_format }} </time>
-                  <span>-</span>
-                  <span class="whitespace-nowrap">{{ item.durations }} min read</span>
-                  <span>-</span>
-                  <span class="text-sm">{{ item.description }}</span>
-                </span>
-              </div>
+              <ClientOnly>
+                <div v-if="isMobile" class="inline-block opacity-50 group-hover:opacity-80 space-y-2">
+                  <div class="flex justify-start items-center space-x-2 text-xs">
+                    <time :datetime="item.date" class="whitespace-nowrap min-w-70px"> {{ item.date_format }} </time>
+                    <span>-</span>
+                    <span class="whitespace-nowrap">{{ item.durations }} min read</span>
+                  </div>
+                  <div class="text-sm">
+                    {{ item.description }}
+                  </div>
+                </div>
+                <div v-else class="inline-block opacity-50 group-hover:opacity-80">
+                  <span class="flex justify-start items-center space-x-2 text-xs">
+                    <time :datetime="item.date" class="whitespace-nowrap min-w-70px"> {{ item.date_format }} </time>
+                    <span>-</span>
+                    <span class="whitespace-nowrap">{{ item.durations }} min read</span>
+                    <span>-</span>
+                    <span class="text-sm">{{ item.description }}</span>
+                  </span>
+                </div>
+              </ClientOnly>
             </NuxtLink>
           </li>
         </ul>
