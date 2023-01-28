@@ -1,5 +1,6 @@
 import type { MyCustomParsedContent } from '~/types/query'
 import getReadingTime from '~/helpers/getReadingTime'
+import isValidaDate from '~~/utils/isValidaDate'
 
 import group from '~/utils/group'
 import dateFormatter from '~/utils/dateFormatter'
@@ -7,8 +8,23 @@ import dateFormatter from '~/utils/dateFormatter'
 const transform = (data: MyCustomParsedContent[]) => {
   if (!data)
     return []
+  const clone = [...data]
+  clone.sort((a, b) => {
+    if (!a.date || !b.date)
+      return 1
+    const dateA = new Date(a.date)
+    const dateB = new Date(b.date)
+    if (!isValidaDate(dateA) || !isValidaDate(dateB))
+      return 1
 
-  const groupPost = group(data, current => new Date(current.date).getFullYear() || '')
+    return dateA > dateB ? -1 : 1
+  })
+
+  const groupPost = group(clone, (current) => {
+    if (current.date === undefined)
+      return ''
+    return new Date(current.date).getFullYear() || ''
+  })
 
   const entries = Object.entries(groupPost)
 
@@ -29,8 +45,8 @@ const transform = (data: MyCustomParsedContent[]) => {
           return {
             ...i,
             durations: readingTime.minutes,
-            date_iso_string: new Date(i.date).toISOString(),
-            date_format: dateFormatter(new Date(i.date)),
+            date_iso_string: i.date ? new Date(i.date).toISOString() : '',
+            date_format: i.date ? dateFormatter(new Date(i.date)) : '',
           }
         }),
       }
