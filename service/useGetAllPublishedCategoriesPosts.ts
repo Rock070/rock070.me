@@ -22,8 +22,8 @@ const transform = (data: MyCustomParsedContent[]) => {
           return {
             ...i,
             durations: readingTime.minutes,
-            date_iso_string: new Date(i.date).toISOString(),
-            date_format: dateFormatter(new Date(i.date)),
+            date_iso_string: i.date ? new Date(i.date).toISOString() : '',
+            date_format: i.date ? dateFormatter(new Date(i.date)) : '',
           }
         }),
       }
