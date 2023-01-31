@@ -30,6 +30,9 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'zh-Hant-TW',
+      },
       title: 'rock070.me',
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' },
