@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   extends: '@nuxt-themes/docus',
   nitro: {
     prerender: {
-      routes: ['/sitemap.xml'],
+      routes: ['/sitemap.xml', '/robots.txt'],
     },
   },
   modules: [
