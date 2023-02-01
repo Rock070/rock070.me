@@ -1,14 +1,25 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
 import MolHeader from '~/components/Molecules/MolHeader.vue'
 import { useContent, useRuntimeConfig } from '#imports'
-import useQueryPathGetPublishedPost from '~/service/useQueryPathGetPublishedPost'
+import getReadingTime from '~/helpers/getReadingTime'
+
+import dateFormatter from '~/utils/dateFormatter'
 
 const content = await useContent()
-
 const config = useRuntimeConfig()
 
 const { page } = content
+
+const date_format = computed(() => {
+  const date = page.value.date
+  return date ? dateFormatter(new Date(date)) : ''
+})
+
+const durations = computed(() => {
+  const body = page.value.body
+
+  return body ? getReadingTime(body)?.minutes : ''
+})
 
 useSeoMeta({
   // title
@@ -30,22 +41,18 @@ useSeoMeta({
 })
 
 useContentHead(page)
-
-const route = useRoute()
-
-const { data: article } = await useQueryPathGetPublishedPost(route.path)
 </script>
 
 <template>
   <NuxtLayout name="basic">
     <div class="inline-block mb-6 lg:mb-10">
       <h1 class="font-bold text-2xl lg:text-4xl text-center">
-        {{ article?.title }}
+        {{ page?.title }}
       </h1>
       <span class="flex justify-center items-center space-x-2 text-sm opacity-60">
-        <time :datetime="article?.date" class="whitespace-nowrap min-w-70px"> {{ article?.date_format }} </time>
+        <time :datetime="page?.date" class="whitespace-nowrap min-w-70px"> {{ date_format }} </time>
         <span>-</span>
-        <span class="whitespace-nowrap">{{ article?.durations }} min read</span>
+        <span class="whitespace-nowrap">{{ durations }} min read</span>
       </span>
       <article class="prose min-w-80vw lg:min-w-60vw break-all">
         <slot />
