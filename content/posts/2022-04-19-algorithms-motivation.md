@@ -3,6 +3,7 @@ title: 學習動機與目標
 description: 學習資料結構與演算法的動機與目標
 date: 2022-04-19 21:24:58
 categories: algorithms
+layout: post
 ---
 
 ### 先說一下我的背景
@@ -31,7 +32,7 @@ categories: algorithms
   - Dynamic Programming
   - Greedy
 
-- 資料結構 
+- 資料結構
   - B Linked List
   - B Doubly Linked List
   - B Queue
@@ -46,8 +47,6 @@ categories: algorithms
   - A Red-Black Tree
   - A Graph (both directed and undirected)
   - A Bloom Filter
-
-
 
 ### javascript 演算法與資料結構路線圖與參考文章
 

@@ -3,6 +3,7 @@ title: 2022 回顧與 2023 目標
 description: 2022 的反省與 2023 立下的目標與長期的核心目的
 date: 2022/12/31 22:00:31
 categories: 職涯規劃
+layout: post
 ---
 
 ::alert

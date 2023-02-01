@@ -24,14 +24,21 @@ export default defineNuxtConfig({
     '@unocss/reset/tailwind.css',
     '~/styles/themes.css',
   ],
+
   vite: {
     plugins: [
       svgLoader(),
     ],
   },
   content: {
-  // https://content.nuxtjs.org/api/configuration
-    documentDriven: true,
+    ignores: [
+      'drafts',
+    ],
+    // https://content.nuxtjs.org/api/configuration
+    documentDriven: {
+      layoutFallbacks: ['post'],
+    },
+
   },
   app: {
     head: {

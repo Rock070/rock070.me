@@ -3,22 +3,25 @@ title: Linked List(連結串列)
 description: Linked List(連結串列) 資料結構的學習
 date: 2022-04-20 19:33:03
 categories: data structure
+layout: post
 ---
 
 Linked List 連結串列，是資料結構中是常見、基本的資料型態，由 Node(節點）組成，每個節點各自儲存在非連續的記憶體位址，並透過 Pointer(指標) 來紀錄下一個節點的位址，最後一個節點的 pointer 指向 Null。
 
-#### Linked List 有兩項屬性：
+#### Linked List 有兩項屬性
+
   1. length(連結長度)
   2. head(第一個 Node 位址)
 
-#### Node 有兩項屬性：
+#### Node 有兩項屬性
+
   1. value
   2. Pointer（下一個 Node 的位址，最後一個 Node 指向 null）
-
 
 從下圖可以看到每一個 Node 都指向下一個 Node 位址，最後一個指向 Null。
 
 ![](https://i.imgur.com/nIFp6SU.png)
+
 ### 用 JavaScript 實作一個 Linked List
 
 [完整程式碼 - GitHub](https://github.com/Rock070/algorithms-data-structure-repo/blob/master/data-structure/linked-list/index.js)，可以先 clone 下來，或是跟著下面一步一步建立函式。
@@ -63,7 +66,7 @@ insertAt
 removeAt
 ```
 
-### Push 
+### Push
 
 在連結的結尾加上一個 Node
 
@@ -86,7 +89,7 @@ const push = (value) => {
 }
 ```
 
-### Pop 
+### Pop
 
 把最後一個 Node 排除
 
@@ -113,9 +116,11 @@ const pop = () => {
   return popNode
 }
 ```
+
 ### printAll
 
 印出 Linked List 內所有的值
+
 ```js
 const printAll = () => {
   // 沒有節點則印出 nothing
@@ -153,6 +158,7 @@ const shift = () => {
   length--
 }
 ```
+
 ### get
 
 根據 index 來找值，與 array 不同的是，需要從第一個節點開始找，直到找到 index 指定的節點
@@ -174,6 +180,7 @@ const get = (index) => {
   return currentNode.value
 }
 ```
+
 ### unshift
 
 在 head 前新增一個節點，並指定新節點為 head
@@ -194,6 +201,7 @@ const unshift = (value) => {
 ### insertAt
 
 在某個 index 插入一個節點
+
 ```js
 const insertAt = (index, value) => {
   // 若 index 大於長度或小於 0 則返回 null
@@ -254,27 +262,32 @@ const removeAt = (index) => {
   return value
 }
 ```
+
 # Linked List 與 Array 的比較
 
 ### Big O
 
-|                    | Array | Linked List | 
+|                    | Array | Linked List |
 | ----------         | ------| ---------- |
-| 存取資料             | O(1) | O(n) | 
-| 插入與刪除第一筆資料   | O(n) | O(1) | 
-| 插入與刪除最後一筆資料 | O(1) | O(n) | 
-| 插入與刪除中間值的資料 | O(n) | O(n) | 
-## Linked List 
+| 存取資料             | O(1) | O(n) |
+| 插入與刪除第一筆資料   | O(n) | O(1) |
+| 插入與刪除最後一筆資料 | O(1) | O(n) |
+| 插入與刪除中間值的資料 | O(n) | O(n) |
+
+## Linked List
 
 特性
+
 - 沒有 index
 - 每個節點連結是透過 "next" 指標
 
 優點
+
 - 新增刪除資料較快，因為不需要調整 index
 - 資料數量是動態的，不像 Array 有 resize 的問題。
 
 缺點
+
 - 因為沒有 index，所以在查找特定 node 的時候，需要從連結的頭開始找，時間複雜度為 O(N)
 - 比 Array 使用更多的記憶體空間，因為每一個 node 都需要額外的空間來存儲存 pointer
 - 儲存在記憶體的位址並不連續，需要到各個 node 位址去存取，相對 Array 連續的位址會更花時間。
@@ -286,16 +299,19 @@ const removeAt = (index) => {
 - 需要頻繁地進行新增或刪除的動作
 - 不需要快速查詢資料
 
-## Array 
+## Array
 
 特性
+
 - 有 index
 
 優點
+
 - 可以快速的存取任意的 index 元素，時間複雜度為 O(1)。
 - 不需存 pointer 紀錄，較省記憶體空間
 
 缺點
+
 - 插入與刪除的方法是較花時間的，以 shift 為例，刪掉第一個元素之後，陣列中所有的元素的 index 都需調整
 
 適用時機
@@ -307,7 +323,6 @@ const removeAt = (index) => {
 ## 總結
 
 在 JavaScript 中實在想不到什麼情境會使用 Linked List，目前想到只有在大量的資料處理的時候會用的，若有其他的情境可以使用，請分享給我知道 XD
-
 
 ## leetcode 練習
 

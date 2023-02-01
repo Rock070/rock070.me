@@ -56,7 +56,7 @@ const transform = (data: MyCustomParsedContent[]) => {
 const useGetAllPublishedPosts = () => {
   const contentQuery = queryContent('/posts')
   const getAllPublishedPosts = () => contentQuery.find().then((res) => {
-    const posts = res.filter(item => !item.draft)
+    const posts = res.filter(item => !item.draft && !item._empty)
 
     return posts as MyCustomParsedContent[]
   })
