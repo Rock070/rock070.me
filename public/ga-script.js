@@ -1,7 +1,7 @@
 window.dataLayer = window.dataLayer || []
 
-const gtag = () => {
-  // eslint-disable-next-line no-undef
+function gtag() {
+  // eslint-disable-next-line no-undef, prefer-rest-params
   dataLayer.push(arguments)
 }
 
