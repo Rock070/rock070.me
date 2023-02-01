@@ -44,19 +44,24 @@ useContentHead(page)
 </script>
 
 <template>
-  <NuxtLayout name="basic">
-    <div class="inline-block mb-6 lg:mb-10">
-      <h1 class="font-bold text-2xl lg:text-4xl text-center">
-        {{ page?.title }}
-      </h1>
-      <span class="flex justify-center items-center space-x-2 text-sm opacity-60">
-        <time :datetime="page?.date" class="whitespace-nowrap min-w-70px"> {{ date_format }} </time>
-        <span>-</span>
-        <span class="whitespace-nowrap">{{ durations }} min read</span>
-      </span>
-      <article class="prose min-w-80vw lg:min-w-60vw break-all">
-        <slot />
+  <div class="min-h-100vh bg-white text-[#333333] dark:bg-black dark:text-white">
+    <MolHeader class="px-4 py-3 lg:p-8" />
+    <main class="px-5 pt-5 pb-16 lg:px-8 lg:pt-5 lg:pb-20 flex flex-col items-center">
+      <article>
+        <div class="inline-block mb-6 lg:mb-10">
+          <h1 class="font-bold text-2xl lg:text-4xl text-center">
+            {{ page?.title }}
+          </h1>
+          <span class="flex justify-center items-center space-x-2 text-sm opacity-60">
+            <time :datetime="page?.date" class="whitespace-nowrap min-w-70px"> {{ date_format }} </time>
+            <span>-</span>
+            <span class="whitespace-nowrap">{{ durations }} min read</span>
+          </span>
+          <div class="prose min-w-80vw lg:min-w-70vw break-all">
+            <slot />
+          </div>
+        </div>
       </article>
-    </div>
-  </NuxtLayout>
+    </main>
+  </div>
 </template>
