@@ -4,7 +4,7 @@ import MolHeader from '~~/components/Molecules/MolHeader.vue'
 
 import useGetAllPublishedPosts from '~/service/useGetAllPublishedPosts'
 
-import { useContent, useContentHead, useRequestEvent } from '#imports'
+import { useContent } from '#imports'
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
@@ -12,7 +12,7 @@ const isMobile = breakpoints.isSmaller('md')
 
 const { navigation, page, surround, globals } = useContent()
 
-const { data: articles } = useGetAllPublishedPosts()
+const { data: articles } = await useGetAllPublishedPosts()
 </script>
 
 <template>

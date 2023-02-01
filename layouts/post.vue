@@ -3,7 +3,6 @@ import { useRoute } from 'vue-router'
 import MolHeader from '~/components/Molecules/MolHeader.vue'
 import { useContent, useRuntimeConfig } from '#imports'
 import useQueryPathGetPublishedPost from '~/service/useQueryPathGetPublishedPost'
-import OrgDocumentDrivenNotFound from '~/components/Organisms/OrgDocumentDrivenNotFound.vue'
 
 const content = await useContent()
 
@@ -34,17 +33,7 @@ useContentHead(page)
 
 const route = useRoute()
 
-const { data: article, pending } = useQueryPathGetPublishedPost(route.path)
-
-const display = computed(() =>
-  ({
-    ...article.value,
-    body: {
-      ...article.value?.body,
-      children: article.value?.body.children.filter(node => node.tag !== 'h1') ?? [],
-    },
-  }),
-)
+const { data: article } = await useQueryPathGetPublishedPost(route.path)
 </script>
 
 <template>
@@ -52,12 +41,12 @@ const display = computed(() =>
     <MolHeader class="px-4 py-3 lg:p-8" />
     <main class="px-5 pt-5 pb-16 lg:px-8 lg:pt-5 lg:pb-20 flex flex-col items-center">
       <article>
-        <div v-if="!pending && article" class="inline-block mb-6 lg:mb-10">
+        <div class="inline-block mb-6 lg:mb-10">
           <h1 class="font-bold text-2xl lg:text-4xl text-center">
             {{ article?.title }}
           </h1>
           <span class="flex justify-center items-center space-x-2 text-sm opacity-60">
-            <time :datetime="article.date" class="whitespace-nowrap min-w-70px"> {{ article?.date_format }} </time>
+            <time :datetime="article?.date" class="whitespace-nowrap min-w-70px"> {{ article?.date_format }} </time>
             <span>-</span>
             <span class="whitespace-nowrap">{{ article?.durations }} min read</span>
           </span>
@@ -65,9 +54,6 @@ const display = computed(() =>
             <slot />
           </article>
         </div>
-        <div v-else-if="pending" />
-        <!-- TODO: skeleton -->
-        <OrgDocumentDrivenNotFound v-else />
       </article>
     </main>
   </div>
