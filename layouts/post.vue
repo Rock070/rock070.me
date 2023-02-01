@@ -37,24 +37,19 @@ const { data: article } = await useQueryPathGetPublishedPost(route.path)
 </script>
 
 <template>
-  <div class="min-h-100vh bg-white text-[#333333] dark:bg-black dark:text-white">
-    <MolHeader class="px-4 py-3 lg:p-8" />
-    <main class="px-5 pt-5 pb-16 lg:px-8 lg:pt-5 lg:pb-20 flex flex-col items-center">
-      <article>
-        <div class="inline-block mb-6 lg:mb-10">
-          <h1 class="font-bold text-2xl lg:text-4xl text-center">
-            {{ article?.title }}
-          </h1>
-          <span class="flex justify-center items-center space-x-2 text-sm opacity-60">
-            <time :datetime="article?.date" class="whitespace-nowrap min-w-70px"> {{ article?.date_format }} </time>
-            <span>-</span>
-            <span class="whitespace-nowrap">{{ article?.durations }} min read</span>
-          </span>
-          <article class="prose min-w-80vw lg:min-w-70vw break-all">
-            <slot />
-          </article>
-        </div>
+  <NuxtLayout name="basic">
+    <div class="inline-block mb-6 lg:mb-10">
+      <h1 class="font-bold text-2xl lg:text-4xl text-center">
+        {{ article?.title }}
+      </h1>
+      <span class="flex justify-center items-center space-x-2 text-sm opacity-60">
+        <time :datetime="article?.date" class="whitespace-nowrap min-w-70px"> {{ article?.date_format }} </time>
+        <span>-</span>
+        <span class="whitespace-nowrap">{{ article?.durations }} min read</span>
+      </span>
+      <article class="prose min-w-80vw lg:min-w-60vw break-all">
+        <slot />
       </article>
-    </main>
-  </div>
+    </div>
+  </NuxtLayout>
 </template>
