@@ -41,7 +41,7 @@
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
-      "eslint --max-warnings=0"
+      "eslint --no-ignore 'public/ga-script.js' --max-warnings=0"
     ]
   }
 }

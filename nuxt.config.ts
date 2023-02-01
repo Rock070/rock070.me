@@ -42,6 +42,16 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      script: [
+        {
+          async: true,
+          src: 'https://www.googletagmanager.com/gtag/js?id=G-3LSL8R2FN8',
+        },
+        {
+          async: false,
+          src: process.env.BASE_URL ? `${process.env.BASE_URL}/ga-script.js` : 'https:rock070.me/ga.script.js',
+        },
+      ],
       htmlAttrs: {
         lang: 'zh-Hant-TW',
       },
