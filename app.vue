@@ -9,5 +9,7 @@ const layoutName = computed(() =>
 </script>
 
 <template>
-  <NuxtLayout :name="layoutName" />
+  <div>
+    <NuxtPage />
+  </div>
 </template>

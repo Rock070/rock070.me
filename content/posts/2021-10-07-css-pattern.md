@@ -3,6 +3,7 @@ title: CSS 設計模式研究筆記
 description: 關於 CSS 歷史進展：OOCSS, SMACSS, BEM, CSS In JS, Atomic CSS 的研究
 date: 2021/10/07 01:00:11
 categories: CSS
+layout: post
 ---
 
 CSS 是一個好理解但不好使用跟維護的語言，所以衍生出非常多的理論跟方法，目的是為了提高程式碼在開發時的可讀性、維護性、模組化、效率 ...等等

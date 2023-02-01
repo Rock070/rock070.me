@@ -3,6 +3,7 @@ title: 如何切換 Git 遠端分支
 description: 更換 Git 綁定好的遠端分支的方法
 date: 2022-06-03 21:32:00
 categories: Git
+layout: post
 ---
 
 ## 檢查對應的遠端分支  
@@ -18,8 +19,7 @@ git branch -vv
 (END)
 ```
 
-
-## 更換分支 
+## 更換分支
 
 - 方法一
 
@@ -38,9 +38,8 @@ git branch -vv
 (END)
 ```
 
-
 > [!NOTE] 什麼是 HEAD
-> 目前所在的分支。 
+> 目前所在的分支。
 > 可參考：[【冷知識】HEAD 是什麼東西？](https://gitbook.tw/chapters/using-git/what-is-head)
 
 - 方法二
