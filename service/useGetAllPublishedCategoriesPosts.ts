@@ -8,7 +8,7 @@ const transform = (data: MyCustomParsedContent[]) => {
   if (!data)
     return []
   // FIXME: 分類陣列應該都要有，而不能只有取 [0]
-  const groupPost = group(data, current => Array.isArray(current.categories) ? current.categories[0] : current.categories || '')
+  const groupPost = group(data, current => Array.isArray(current.categories) ? current.categories[0] : current.categories ?? '')
 
   const entries = Object.entries(groupPost)
 
@@ -33,7 +33,7 @@ const transform = (data: MyCustomParsedContent[]) => {
 const useGetAllPublishedCategoriesPosts = () => {
   const contentQuery = queryContent('/posts')
   const getAllPublishedPosts = () => contentQuery.find().then((res) => {
-    const posts = res.filter(item => !item.draft)
+    const posts = res.filter(item => !item.draft && !item._empty)
 
     return posts as MyCustomParsedContent[]
   })
