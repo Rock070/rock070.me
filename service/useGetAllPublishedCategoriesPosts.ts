@@ -1,22 +1,28 @@
 import type { MyCustomParsedContent } from '~/types/query'
 import getReadingTime from '~/helpers/getReadingTime'
+import useCache from '@/composables/useCache'
 
-import group from '~/utils/group'
 import dateFormatter from '~/utils/dateFormatter'
 
 const transform = (data: MyCustomParsedContent[]) => {
   if (!data)
     return []
-  // FIXME: 分類陣列應該都要有，而不能只有取 [0]
-  const groupPost = group(data, current => Array.isArray(current.categories) ? current.categories[0] : current.categories ?? '')
 
-  const entries = Object.entries(groupPost)
+  const { cache, update } = useCache()
+  data.forEach((item) => {
+    const c = item.categories
+    if (Array.isArray(c))
+      c.forEach(i => update(i, item))
+    else update(c, item)
+  })
+
+  const entries = Object.entries(cache.value) as [string, MyCustomParsedContent[]][]
 
   return entries
     .map(([c, g]) => {
       return {
         category: c,
-        list: g.map((i) => {
+        list: g?.map((i) => {
           const readingTime = getReadingTime(i.body)
 
           return {
@@ -31,12 +37,18 @@ const transform = (data: MyCustomParsedContent[]) => {
 }
 
 const useGetAllPublishedCategoriesPosts = () => {
-  const contentQuery = queryContent('/posts')
-  const getAllPublishedPosts = () => contentQuery.find().then((res) => {
-    const posts = res.filter(item => !item.draft && !item._empty)
+  const contentQuery = queryContent('/posts/')
 
-    return posts as MyCustomParsedContent[]
-  })
+  const getAllPublishedPosts = () =>
+    contentQuery
+      .only(['_path', 'date', 'description', 'body', 'title', 'categories'])
+      .sort({ date: -1 })
+      .find()
+      .then((res) => {
+        const posts = res.filter(item => !item.draft && !item._empty)
+
+        return posts as MyCustomParsedContent[]
+      })
   return useAsyncData(getAllPublishedPosts, {
     default: () => [],
     transform,
