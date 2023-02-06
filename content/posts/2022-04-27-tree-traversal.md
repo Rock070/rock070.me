@@ -3,7 +3,7 @@ title: 樹的走訪：寬度優先走訪（BFS）、深度優先走訪（DFS）
 description: 樹（Tree）演算法的筆記
 date: 2022-04-27 23:17:41
 categories: data structure
-layout: post
+
 ---
 
 走訪的意思是，從根節點開始，逐個走訪各個節點，不同的拜訪順序，在程式碼的實作有很大的落差。

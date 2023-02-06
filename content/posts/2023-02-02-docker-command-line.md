@@ -3,7 +3,6 @@ date: 2023-02-02 23:30:22
 title: Docker 指令
 description: 紀錄關於 docker 的指令
 categories: docker
-layout: post
 ---
 
 ## Image

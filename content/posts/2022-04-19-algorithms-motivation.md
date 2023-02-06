@@ -3,7 +3,7 @@ title: 學習動機與目標
 description: 學習資料結構與演算法的動機與目標
 date: 2022-04-19 21:24:58
 categories: algorithms
-layout: post
+
 ---
 
 ### 先說一下我的背景

@@ -36,7 +36,18 @@ export default defineNuxtConfig({
     ],
     // https://content.nuxtjs.org/api/configuration
     documentDriven: {
-      layoutFallbacks: ['post'],
+      globals: {
+        theme: {
+          where: [
+            {
+              _id: 'content:posts:_theme.yml',
+            },
+          ],
+          without: ['_'],
+        },
+      },
+      // Will use `theme` global to search for a fallback `layout` key.
+      layoutFallbacks: ['theme'],
     },
 
   },

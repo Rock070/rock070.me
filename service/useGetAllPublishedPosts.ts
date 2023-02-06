@@ -40,6 +40,7 @@ const useGetAllPublishedPosts = () => {
   const contentQuery = queryContent('/posts/')
   const getAllPublishedPosts = () => contentQuery
     .sort({ date: -1 })
+    .where({ _type: { $ne: 'yaml' } })
     .find()
     .then((res) => {
       const posts = res.filter(item => !item.draft && !item._empty)

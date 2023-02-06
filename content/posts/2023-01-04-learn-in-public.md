@@ -3,7 +3,7 @@ title: 如何在公開場合學習
 description: 學習如何在公開場合學習，來記錄自己的成長，誠實面對自己的不完美與建立自己的品牌
 date: 2023-01-04 03:13:36
 categories: 軟實力
-layout: post
+
 ---
 
 在 dev.to 看到這篇文章，[How to learn in public - dev.to](https://dev.to/blackgirlbytes/how-to-learn-in-public-1coh)，覺得很讚，來寫一下筆記。

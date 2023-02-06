@@ -3,7 +3,7 @@ date: 2023-02-02 23:40:22
 title: Dockerfile 撰寫
 description: Dockerfile 撰寫的各指令意思
 categories: docker
-layout: post
+
 ---
 
 ## 參數

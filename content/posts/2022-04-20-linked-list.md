@@ -3,7 +3,7 @@ title: Linked List(連結串列)
 description: Linked List(連結串列) 資料結構的學習
 date: 2022-04-20 19:33:03
 categories: data structure
-layout: post
+
 ---
 
 Linked List 連結串列，是資料結構中是常見、基本的資料型態，由 Node(節點）組成，每個節點各自儲存在非連續的記憶體位址，並透過 Pointer(指標) 來紀錄下一個節點的位址，最後一個節點的 pointer 指向 Null。

@@ -3,7 +3,7 @@ title: 如何切換 Git 遠端分支
 description: 更換 Git 綁定好的遠端分支的方法
 date: 2022-06-03 21:32:00
 categories: Git
-layout: post
+
 ---
 
 ## 檢查對應的遠端分支  

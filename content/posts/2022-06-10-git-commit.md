@@ -3,7 +3,7 @@ title: 建立可讀性高的 git 提交吧！
 description: 良好的 git message 可以使提交紀錄看起來更友善，也更好在未來追蹤
 date: 2022-06-10 21:04:33
 categories: Git
-layout: post
+
 ---
 
 在討論之前，我們應該先知道什麼是「可讀性低的提交」。

@@ -1,6 +1,7 @@
 ---
 title: Rock070
 layout: home
+navigation: false
 ---
 
 你好，我叫 Rock，是來自台灣的前端工程師，我喜歡動腦、喜歡實作，期待有一天能做出對世界有用的東西。

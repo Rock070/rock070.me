@@ -42,6 +42,7 @@ const useGetAllPublishedCategoriesPosts = () => {
   const getAllPublishedPosts = () =>
     contentQuery
       .only(['_path', 'date', 'description', 'body', 'title', 'categories'])
+      .where({ _type: { $ne: 'yaml' } })
       .sort({ date: -1 })
       .find()
       .then((res) => {

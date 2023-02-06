@@ -3,7 +3,7 @@ date: 2023-02-02 23:00:22
 title: 自己打包一個 docker image（linux + git + node + pnpm）
 description: 透過 alpine image 建立容器，並在容器內建立環境，包含 git + node + pnpm，重新把容器打包成 image，並上傳到 DockerHub
 categories: docker
-layout: post
+
 ---
 
 ## 基礎鏡像：alpine images

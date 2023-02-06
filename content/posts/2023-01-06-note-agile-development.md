@@ -3,7 +3,7 @@ title: 緯育 Tibame【手把手帶你跑敏捷】如何落實技術實踐心得
 description: 學習敏捷開發流程實踐的心得紀錄
 date: 2022-06-22 21:15:34
 categories: [CI/CD, 敏捷開發]
-layout: post
+
 ---
 
 [課程網址](https://hqtraining.tibame.com/course/453/)
