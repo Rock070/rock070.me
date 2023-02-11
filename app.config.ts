@@ -10,17 +10,17 @@ export default defineAppConfig({
       youtube: '',
       medium: '',
     },
-    layout: 'default',
+    layout: {
+      fluid: true,
+    },
     aside: {
       level: 1,
       filter: [],
     },
     header: {
-      // title: false,
-      // logo: true,
-      // showLinkIcon: false,
-      title: '',
+      showLinkIcon: false,
       logo: 'Logo',
+      // fluid: true,
       // showLinkIcon: false,
       // exclude: ['/posts'],
     },
@@ -33,11 +33,13 @@ export default defineAppConfig({
       textLinks: [],
       iconLinks: [
         {
+          icon: '123',
           label: 'NuxtJS',
           href: 'https://nuxtjs.org',
           component: 'IconNuxtLabs',
         },
         {
+          icon: '123',
           label: 'Vue Telescope',
           href: 'https://vuetelescope.com',
           component: 'IconVueTelescope',
