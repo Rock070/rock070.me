@@ -2,6 +2,30 @@
 
 :root {
   font-family: Inter,ui-sans-serif,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
+  --header-height: 64px;
+  --footer-height: 82px;
+
+  .custom-scroll {
+    /* width */
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+  
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+  
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+  
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
 }
 
 button {
@@ -14,10 +38,6 @@ button {
 a {
   cursor: pointer;
   color: initial;
-}
-
-:root.dark a {
-  color: white;
 }
 
 blockquote {
@@ -37,3 +57,30 @@ blockquote::before{
 .prose {
   max-width: 65vw !important;
 }
+
+:root[data-theme="dark"] {
+  .custom-scroll {
+    /* width */
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+  
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: #888;
+    }
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #f1f1f1;
+    }
+  
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+  
+}
+
+
