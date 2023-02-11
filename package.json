@@ -5,12 +5,13 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "clean": "pnpx rimraf node_modules .nuxt",
+    "clean": "pnpx rimraf node_modules && nuxi cleanup",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "svg:build": "esno ./scripts/svg-generate",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typecheck": "nuxi typecheck"
   },
   "dependencies": {
     "@nuxt-themes/docus": "^1.8.1",
