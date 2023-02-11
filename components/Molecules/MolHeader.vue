@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useToggle } from '@vueuse/core'
 import { Icon } from '@iconify/vue'
 import type { RouteLocationRaw } from 'vue-router'
 
@@ -59,7 +58,17 @@ const menus: Menu[] = [
 </script>
 
 <template>
-  <header class="flex justify-between">
+  <header
+    class="
+      z-100 sticky top-0
+      bg-white dark:bg-dark
+      flex justify-between
+      dark:border-b dark:border-white
+      shadow-[5px_2px_5px_3px_#EBEBEB]
+      dark:shadow-[2px_5px_8px_3px_#393535]
+      px-4 py-3 lg:p-4 mb-4
+    "
+  >
     <div>
       <nuxt-link to="/" aria-label="Go to Home page">
         <Icon class="w-6 h-6" icon="mdi-light:home" />
