@@ -43,7 +43,7 @@ async function generateSVG(meta: BlogPost, output: string) {
 }
 
 const DIST_PATH = resolve(__dirname, '../public/og-images')
-const POSTS_PATH = ['content/1.notes/**/*.md', 'content/2.thinks/**/*.md']
+const POSTS_PATH = ['content/1.notes/**/*.md', 'content/2.thinks/**/*.md', 'content/index.md']
 
 const getAllPostMeta = async () => {
   const postsPaths = await Promise.all(POSTS_PATH.map(async p => await fg(p))).then(res => res.flat())

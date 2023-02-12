@@ -96,7 +96,7 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image',
-          content: '',
+          content: process.env.BASE_URL && `${process.env.BASE_URL}/og-images/og-Rock070}.png`,
         },
         {
           property: 'og:type',
@@ -113,6 +113,10 @@ export default defineNuxtConfig({
         {
           name: 'twitter:card',
           content: 'summary_large_image',
+        },
+        {
+          name: 'twitter:image',
+          content: process.env.BASE_URL && `${process.env.BASE_URL}/og-images/og-Rock070.png`,
         },
         {
           name: 'twitter:site',
