@@ -29,7 +29,12 @@ const displayArticles = computed(() => {
 <template>
   <AppHeader />
   <Container>
-    <main class="px-5 pt-5 pb-16 lg:px-8 lg:pt-5 lg:pb-20 flex flex-col items-center">
+    <main
+      class="
+        px-5 pt-5 pb-16 lg:px-8 lg:pt-5 lg:pb-20 flex flex-col items-center
+        min-h-[calc(100vh-var(--header-height)-var(--footer-height))]
+      "
+    >
       <div class="prose min-w-70vw">
         <h1 class="mb-5 text-left font-extrabold">
           標籤分類
