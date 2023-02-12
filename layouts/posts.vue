@@ -15,7 +15,7 @@ const { data: articles } = await useGetAllPublishedPosts()
   <main class="px-5 pt-5 pb-16 lg:px-8 lg:pt-5 lg:pb-20 flex flex-col items-center">
     <div class="prose min-w-70vw">
       <h1 class="mb-15 lg:mb-30 text-left font-extrabold">
-        Posts
+        所有文章
       </h1>
 
       <section class="space-y-30">

@@ -34,6 +34,9 @@ export default defineNuxtConfig({
     ignores: [
       'drafts',
     ],
+    navigation: {
+      fields: ['icon'],
+    },
     // https://content.nuxtjs.org/api/configuration
     documentDriven: {
       globals: {

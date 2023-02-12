@@ -30,7 +30,7 @@ const displayArticles = computed(() => {
   <main class="px-5 pt-5 pb-16 lg:px-8 lg:pt-5 lg:pb-20 flex flex-col items-center">
     <div class="prose min-w-70vw">
       <h1 class="mb-5 text-left font-extrabold">
-        Categories
+        標籤分類
       </h1>
       <ul class="not-prose flex flex-wrap mb-24 children:mx-1 children:my-2">
         <li v-for="t in displayTags" :key="t.label">

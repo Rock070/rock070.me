@@ -22,7 +22,7 @@ export default defineAppConfig({
       logo: 'Logo',
       // fluid: true,
       // showLinkIcon: false,
-      // exclude: ['/posts'],
+      exclude: ['/posts'],
     },
     footer: {
       credits: {
