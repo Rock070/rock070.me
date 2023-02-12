@@ -9,11 +9,11 @@ export default defineEventHandler(async (event) => {
   })
 
   for (const doc of docs) {
-    if (doc._path?.startsWith('/drafts'))
+    if (doc._path?.startsWith('/drafts') || doc._type === 'yaml')
       continue
     sitemap.write({
       url: doc._path,
-      changefreq: 'monthly',
+      changefreq: 'weekly',
     })
   }
   sitemap.end()
