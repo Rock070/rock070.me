@@ -1,27 +1,22 @@
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import MolHeader from '~~/components/Molecules/MolHeader.vue'
 
 import useGetAllPublishedPosts from '~/service/useGetAllPublishedPosts'
-
-import { useContent } from '#imports'
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const isMobile = breakpoints.isSmaller('md')
 
-const { navigation, page, surround, globals } = useContent()
-
 const { data: articles } = await useGetAllPublishedPosts()
 </script>
 
 <template>
-  <div class="min-h-100vh bg-white text-[#333333] dark:bg-black dark:text-white">
-    <MolHeader class="px-4 py-3 lg:p-8" />
+  <AppHeader />
+  <Container>
     <main class="px-5 pt-5 pb-16 lg:px-8 lg:pt-5 lg:pb-20 flex flex-col items-center">
       <div class="prose min-w-70vw">
         <h1 class="mb-15 lg:mb-30 text-left font-extrabold">
-          Posts
+          所有文章
         </h1>
 
         <section class="space-y-30">
@@ -64,5 +59,6 @@ const { data: articles } = await useGetAllPublishedPosts()
         </section>
       </div>
     </main>
-  </div>
+  </Container>
+  <AppFooter />
 </template>

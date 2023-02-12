@@ -43,22 +43,22 @@ async function generateSVG(meta: BlogPost, output: string) {
 }
 
 const DIST_PATH = resolve(__dirname, '../public/og-images')
-const POSTS_PATH = 'content/posts/**/*.md'
+const POSTS_PATH = ['content/1.notes/**/*.md', 'content/2.thinks/**/*.md']
 
 const getAllPostMeta = async () => {
-  const posts = await fg(POSTS_PATH).then(async (res) => {
-    const p = res.map(async (p) => {
-      return await fs.readFile(p, 'utf-8').then((c) => {
+  const postsPaths = await Promise.all(POSTS_PATH.map(async p => await fg(p))).then(res => res.flat())
+  const postsFrontMatterPromises = postsPaths.map(async p =>
+    await fs.readFile(p, 'utf-8')
+      .then((c) => {
         const frontmatter = fm(c).frontmatter
         if (!frontmatter)
           return null
         const { data } = parseFrontMatter(`---\n${frontmatter}\n---`)
         return data
-      })
-    })
+      }),
+  )
 
-    return await Promise.all(p)
-  })
+  const posts = await Promise.all(postsFrontMatterPromises)
 
   return posts.filter(i => !!i) as BlogPost[]
 }

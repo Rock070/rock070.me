@@ -25,6 +25,4 @@ Binary Search Tree(BST)
 - Binary Tree: 每個節點最多只能有兩個子節點：左節點、右節點
 - Binary Search Tree: 是一種 Binary Tree，節點的大小要符合規則：left < root < right。
 
-
 ## 二元搜尋樹的 Big O
-
