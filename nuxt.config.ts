@@ -27,6 +27,16 @@ export default defineNuxtConfig({
     plugins: [
       svgLoader(),
     ],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('Prose'))
+              return 'prose'
+          },
+        },
+      },
+    },
   },
   content: {
     ignores: [
