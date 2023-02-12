@@ -96,7 +96,7 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image',
-          content: process.env.BASE_URL && `${process.env.BASE_URL}/og-images/og-Rock070}.png`,
+          content: process.env.BASE_URL && `${process.env.BASE_URL}/og-images/og-Rock070.png`,
         },
         {
           property: 'og:type',
