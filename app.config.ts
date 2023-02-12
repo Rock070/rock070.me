@@ -8,18 +8,13 @@ export default defineAppConfig({
       facebook: '',
       youtube: '',
     },
-    layout: {
-      fluid: true,
-    },
     aside: {
       level: 1,
-      filter: [],
     },
     header: {
       showLinkIcon: false,
       logo: 'Logo',
       exclude: [''],
-      // fluid: true,
     },
     footer: {
       credits: {
