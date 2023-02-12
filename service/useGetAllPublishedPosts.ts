@@ -37,13 +37,15 @@ const transform = (data: MyCustomParsedContent[]) => {
 }
 
 const useGetAllPublishedPosts = () => {
-  const contentQuery = queryContent('/posts/')
+  const contentQuery = queryContent()
+
   const getAllPublishedPosts = () => contentQuery
-    .sort({ date: -1 })
     .where({ _type: { $ne: 'yaml' } })
+    .sort({ date: -1 })
     .find()
     .then((res) => {
-      const posts = res.filter(item => !item.draft && !item._empty)
+      // 過濾草稿、空文章、首頁
+      const posts = res.filter(item => !item.draft && !item._empty && item._path !== '/')
 
       return posts as MyCustomParsedContent[]
     })

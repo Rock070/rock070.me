@@ -3,16 +3,14 @@ import svgLoader from 'vite-svg-loader'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  extends: ['@nuxt-themes/docus'],
+
   nitro: {
     prerender: {
       routes: ['/sitemap.xml', '/robots.txt'],
     },
   },
-  modules: [
-    '@nuxt/content',
-    '@unocss/nuxt',
-  ],
+  extends: ['@nuxt-themes/docus'],
+  modules: ['@unocss/nuxt'],
 
   runtimeConfig: {
     // Public keys that are exposed to the client
@@ -43,7 +41,7 @@ export default defineNuxtConfig({
         theme: {
           where: [
             {
-              _id: 'content:posts:_theme.yml',
+              _id: 'content:_theme.yml',
             },
           ],
           without: ['_'],

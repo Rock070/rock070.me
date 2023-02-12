@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { breakpointsTailwind, isClient, useBreakpoints } from '@vueuse/core'
 import { useContent, useRuntimeConfig } from '#imports'
 import getReadingTime from '~/helpers/getReadingTime'
 
 import dateFormatter from '~/utils/dateFormatter'
-
-const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const config = useRuntimeConfig()
 const { page } = await useContent()
@@ -63,18 +60,3 @@ useContentHead(page)
   </DocsPageLayout>
   <AppFooter />
 </template>
-
-<style>
-.docs-toc-wrapper {
-  @apply relative;
-}
-
-.docs-toc-wrapper:before {
-  @apply w-px h-full;
-  @apply content-[''];
-  @apply absolute top-50% -left-3.5;
-  @apply -translate-y-1/2;
-  @apply bg-dark bg-opacity-20;
-  @apply dark:bg-white dark:bg-opacity-50;
-}
-</style>
