@@ -16,6 +16,16 @@ export default defineNuxtConfig({
     // Public keys that are exposed to the client
     public: {
       baseUrl: process.env.BASE_URL,
+      algolia: {
+        applicationId: process.env.ALGOLIA_APPLICATION_ID,
+        apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
+        lang: 'zh-Hant-TW',
+        langAttribute: 'lang',
+        docSearch: {
+          indexName: 'rock070',
+        },
+      },
+
     },
   },
   css: [
