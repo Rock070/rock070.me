@@ -3,7 +3,6 @@ import svgLoader from 'vite-svg-loader'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-
   nitro: {
     prerender: {
       routes: ['/sitemap.xml', '/robots.txt'],
@@ -64,16 +63,6 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      script: [
-        {
-          async: true,
-          src: 'https://www.googletagmanager.com/gtag/js?id=G-3LSL8R2FN8',
-        },
-        {
-          async: true,
-          src: process.env.BASE_URL ? `${process.env.BASE_URL}/ga-script.js` : 'https:rock070.me/ga.script.js',
-        },
-      ],
       htmlAttrs: {
         lang: 'zh-Hant-TW',
       },
