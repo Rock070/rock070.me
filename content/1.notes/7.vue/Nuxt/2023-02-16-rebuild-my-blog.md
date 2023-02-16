@@ -5,7 +5,7 @@ description: 分享 Nuxt Content + Docus 重寫我的部落格心得
 categories: [Vue, Nuxt]
 ---
 
-![](https://i.imgur.com/BS6BjVE.png)
+![](https://i.imgur.com/ssonaYl.png)
 
 ## 一、前言
 
@@ -14,6 +14,10 @@ categories: [Vue, Nuxt]
 一開始想說先簡單架一個，拿人家都用好的直接套，因為我很懶惰，我怕我花很多時間架好之後，就沒再發文章了，想把重點放在文章，所以直接參考 [Huli 部落格](https://blog.huli.tw) 的框架跟主題 [Hexo](https://hexo.io/zh-tw/) + [Minos](https://github.com/ppoffice/hexo-theme-minos)，也很快就架起來了。
 
 期間發文次數也算不上多，但還是有在做學習的筆記，大部分都放在自己的電腦裡用 [obsidian](https://obsidian.md/) 紀錄，零零散散的不知道該不該發，但最近看到 [How to learn in public](https://dev.to/blackgirlbytes/how-to-learn-in-public-1coh) ，覺得應該把自己的心路歷程與筆記公開，因為事實上每個發佈在網路上的東西都不是完美的，但有些時候卻可以幫助在正在經歷不同階段的人，詳細的內容可以看我的另一篇筆記文章：[如何在公開場合學習](https://rock070.me/thinks/soft-skills/2023-01-04-learn-in-public)。
+
+新部落格：[rock070.me](https://rock070.me/)
+
+![](https://i.imgur.com/BS6BjVE.png)
 
 ## 二、為什麼我不用 Hexo 了？
 
@@ -367,14 +371,14 @@ Nuxt content 的 sitemap 產生我是看這邊的官方文章： [sitemap](https
 - 多語言（i18n）
 - 擴充首頁自我介紹內容
 
-## 可能會做的功能（不一定會做）
+## 十七、可能會做的功能（不一定會做）
 
 - 文章心智圖，像 Obsidian 一樣關聯各文章，就不需要把文章特別分資料夾了。
 - 禪模式，新增一個按鈕可以讓 側邊欄跟右側的 TOC 隱藏起來，讓版面更乾淨，只顯示文章，讓使用者專心的看內容。
 - side project 頁面，可以 Demo 或列出我做過的 side project，達到一個彙整的作用。
 - 靜態資源儲存：舊部落格是把所有圖片都上傳 imgur，雖然可以永久存放，但想嘗試看看 S3。
 
-## 十七、總結心得
+## 十八、總結心得
 
 這次重構比我想像中的久，主要是越做越有勁，自然就越想把東西弄到最好，也大量參考別人的東西，拼拼湊湊成自己的東西，在這個過程中學到很多東西。
 
