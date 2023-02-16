@@ -6,7 +6,7 @@ categories: data structure
 
 ---
 
-在 [singly linked list](https://rock070.github.io/blog.rock070/2022/04/20/linked-list/) 的基礎上，做一些變更：
+在 [singly linked list](https://rock070.me/notes/algorithms/linked-list/2022-04-20-linked-list)的基礎上，做一些變更：
 
 1. 每個節點都新增一個 prev 屬性，指向上一個節點，第一個節點的 prev 指向 null。
 2. Linked List 屬性新增 tail 指向最後一個節點。
