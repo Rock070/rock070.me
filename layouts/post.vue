@@ -45,7 +45,7 @@ useContentHead(page)
 
   <DocsPageLayout>
     <div class="inline-block mb-6 lg:mb-10">
-      <h1 class="font-bold text-2xl lg:text-4xl text-center">
+      <h1 class="font-bold text-2xl lg:text-4xl text-center mb-2">
         {{ page?.title }}
       </h1>
       <span class="flex justify-center items-center space-x-2 text-sm opacity-60">

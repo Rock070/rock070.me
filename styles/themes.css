@@ -75,6 +75,11 @@ blockquote::before{
   } 
 }
 
+@media (min-width: 1024px) {
+  .docs-toc-wrapper{
+    padding-bottom: 24px;
+  }
+}
 
 .docs-toc-wrapper {
   position: relative;
