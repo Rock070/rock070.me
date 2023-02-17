@@ -13,7 +13,7 @@ categories: [Vue, Nuxt]
 
 一開始想說先簡單架一個，拿人家都用好的直接套，因為我很懶惰，我怕我花很多時間架好之後，就沒再發文章了，想把重點放在文章，所以直接參考 [Huli 部落格](https://blog.huli.tw) 的框架跟主題 [Hexo](https://hexo.io/zh-tw/) + [Minos](https://github.com/ppoffice/hexo-theme-minos)，也很快就架起來了。
 
-期間發文次數也算不上多，但還是有在做學習的筆記，大部分都放在自己的電腦裡用 [obsidian](https://obsidian.md/) 紀錄，零零散散的不知道該不該發，但最近看到 [How to learn in public](https://dev.to/blackgirlbytes/how-to-learn-in-public-1coh) ，覺得應該把自己的心路歷程與筆記公開，因為事實上每個發佈在網路上的東西都不是完美的，但有些時候卻可以幫助在正在經歷不同階段的人，詳細的內容可以看我的另一篇筆記文章：[如何在公開場合學習](https://rock070.me/thinks/soft-skills/2023-01-04-learn-in-public)。
+期間發文次數也算不上多，但還是有在做學習的筆記，大部分都放在自己的電腦裡用 [obsidian](https://obsidian.md/) 紀錄，零零散散的不知道該不該發，但最近看到 [How to learn in public](https://dev.to/blackgirlbytes/how-to-learn-in-public-1coh) ，覺得應該把自己的心路歷程與筆記公開，因為事實上每個發佈在網路上的東西都不是完美的，但有些時候卻可以幫助在正在經歷不同階段的人，所以想開始督促自己多多發文，詳細的內容可以看我的另一篇筆記：[如何在公開場合學習](https://rock070.me/thinks/soft-skills/2023-01-04-learn-in-public)。
 
 新部落格：[rock070.me](https://rock070.me/)
 
