@@ -1,7 +1,7 @@
 ---
 date: 2023-02-12 17:39:15
 title: 用 Nuxt Content 重寫我的部落格
-description: 分享 Nuxt Content + Docus 重寫我的部落格心得
+description: 分享 Nuxt 官方網站文件使用的 Nuxt Content 重寫我的部落格心得
 categories: [Vue, Nuxt]
 ---
 
