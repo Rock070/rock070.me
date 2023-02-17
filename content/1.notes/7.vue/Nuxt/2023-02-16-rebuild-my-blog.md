@@ -131,7 +131,7 @@ queryContent()
 :terminal{content="nuxi build"}
 ```
 
-![](https://i.imgur.com/as639BZ.png)
+:terminal{content="nuxi build"}
 
 video-player：
 
@@ -141,7 +141,9 @@ video-player：
 ::
 ```
 
-<img src="https://i.imgur.com/rTBvwsP.png)" width="400px" />
+::div
+  :video-player{src="https://www.youtube.com/watch?v=o9e12WbKrd8"}
+::
 
 另外，我後來在[原始碼](https://github.com/nuxt-themes/docus/tree/main/components)中看到了文件上沒有提到，但也有提供的元件，例如 `AppHeader`, `AppFooter`, `ThemeSelect`... 等等元件，包含「搜尋」、「黑夜模式」、「排版」、「側邊欄」、「文章結構」、「頁首」、「頁尾」、「上一篇文章」、「下一篇文章」等等功能，真的非常方便。
 
@@ -272,6 +274,8 @@ Nuxt content 的 sitemap 產生我是看這邊的官方文章： [sitemap](https
 
 ## 十一、使用 Algolia 做搜尋功能
 
+![](https://i.imgur.com/u0HjmeH.png)
+
 我是透過 [Algolia](https://www.algolia.com/) 底下的一個服務 [docsearch](https://docsearch.algolia.com/docs/what-is-docsearch) 來做申請，使用是免費的，我理解他的原理是根據網站提供的 sitemap，每週去你的網站爬蟲，並且以存在他們的 DB 中，我在前端的搜尋框搜尋的時候，每打一個字就會 Request 一次搜尋結果。
 
 申請網址：<https://docsearch.algolia.com/apply>
@@ -298,10 +302,6 @@ Nuxt content 的 sitemap 產生我是看這邊的官方文章： [sitemap](https
 - 可以直接在後台做搜尋的測試
 - 可以客製化搜尋的結果，有過濾、排序、語系、等等功能，例如：只搜尋內容，不搜尋標題，或是不要出現重複路徑的結果等等。
 - 功能比我想像的多，還要再多研究
-
-### Demo
-
-![](https://i.imgur.com/u0HjmeH.png)
 
 ## 十二、買了新的網域
 
@@ -366,19 +366,19 @@ Nuxt content 的 sitemap 產生我是看這邊的官方文章： [sitemap](https
 
 ![](https://i.imgur.com/bww0l8q.png)
 
-## 十六、未來要做的功能
+## 十五、未來要做的功能
 
 - 多語言（i18n）
 - 擴充首頁自我介紹內容
 
-## 十七、可能會做的功能（不一定會做）
+## 十六、可能會做的功能（不一定會做）
 
 - 文章心智圖，像 Obsidian 一樣關聯各文章，就不需要把文章特別分資料夾了。
 - 禪模式，新增一個按鈕可以讓 側邊欄跟右側的 TOC 隱藏起來，讓版面更乾淨，只顯示文章，讓使用者專心的看內容。
 - side project 頁面，可以 Demo 或列出我做過的 side project，達到一個彙整的作用。
 - 靜態資源儲存：舊部落格是把所有圖片都上傳 imgur，雖然可以永久存放，但想嘗試看看 S3。
 
-## 十八、總結心得
+## 十七、總結心得
 
 這次重構比我想像中的久，主要是越做越有勁，自然就越想把東西弄到最好，也大量參考別人的東西，拼拼湊湊成自己的東西，在這個過程中學到很多東西。
 
