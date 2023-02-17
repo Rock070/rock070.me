@@ -44,7 +44,7 @@ categories: [Vue, Nuxt]
 
 ## 四、Nuxt Content 是什麼？
 
-其實我最初的想法是直接用 Nuxt 這個框架做，然後自己用 [markdown it](https://github.com/markdown-it/markdown-it) 來編譯 markdown, 用 [shiki](https://github.com/shikijs/shiki) 來幫程式碼區塊配色，所有東西都自己做，但後來發現 Nuxt Content 都有提供了這些功能，就直接用了。
+其實我最初的想法是直接用 Nuxt 這個框架做，然後自己用 [markdown it](https://github.com/markdown-it/markdown-it) 來編譯 markdown, 用 [shiki](https://github.com/shikijs/shiki) 來幫程式碼區塊配色，所有東西都自己做，但後來發現 Nuxt Content 都有提供了這些功能，[Nuxt](https://nuxt.com/) 官方的文件也是使用這個套件，所以就直接用了。
 
 ### 功能
 
