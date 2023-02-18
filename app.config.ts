@@ -1,7 +1,7 @@
 export default defineAppConfig({
   docus: {
     socials: {
-      twitter: 'https://twitter.com/Rock070000',
+      twitter: 'Rock070000',
       github: 'Rock070',
       instagram: '___maochi',
       medium: '@Rock070',
