@@ -23,7 +23,7 @@ categories: [Vue, Nuxt]
 
 - 彈性：原本是使用使用別人的主題，我想要客製化我的 layout 會比較麻煩，對我來說彈性不高。另外，久了也有點看膩了這個主題，需要另外去找主題，但找到的主題不一定每個地方的版面都讓我滿意。
 
-- 熟悉度：坦白說很多 Hexo 周邊套件應該有更多功能可以使用，但我只專注在發文章，沒有考慮到 SEO, dark mode, rss, og:image, 多語言（i18n） ...等等。
+- 熟悉度：坦白說很多 Hexo 周邊套件應該有更多功能可以使用，但我只專注在發文章，沒有考慮到 SEO, dark mode, RSS, og-image, 多語言（i18n） ...等等。
   
 - 我想用 TypeScript。
 
@@ -169,11 +169,11 @@ video-player：
 
 ## 七、自己計算文章閱讀時間
 
-因為我很喜歡在讀者讀文章之前，提供一個大約的閱讀時間，讓讀者評估是否現在讀文章，還是等有足夠的時間再讀，所以我透過前面提到的 `queryContent()`，算出文章的總字數，並以每個人「一分鐘閱讀 550 字」的基數來算出閱讀總時間，這個基數是我以相同文章在 medium 上閱讀時間算出來的，當然我猜 Medium 一定不是用這種「線性」的算法，而是用「曲線」的算法，按照不同 HTML 區塊做不同的演算，例如程式碼區塊是一個算法、標題是一個算法，或是透過一段時間的統計資料讓機器學習並隨時改變算法，但這都是我的猜測哈哈。
+因為我很喜歡在讀者讀文章之前，提供一個大約的閱讀時間，讓讀者評估是否現在讀文章，還是等有足夠的時間再讀，所以我透過前面提到的 `queryContent()`，算出文章的總字數，並以「**每個人一分鐘閱讀 550 字**」的基數來算出閱讀總時間，這個基數是我以相同文章在 medium 上閱讀時間算出來的，當然我猜 Medium 一定不是用這種「線性」的算法，而是用「曲線」的算法，按照不同 HTML 區塊做不同的演算，例如程式碼區塊是一個算法、標題是一個算法，或是透過一段時間的統計資料讓機器學習並隨時改變算法，但這都是我的猜測哈哈。
 
 ## 八、我寫了自己的 og-image 產生器
 
-我的需求是每次打包都要根據每篇文章的 meta title (front matter)，去自動生成一張 og-image 可以讓我放在 header。
+我的需求是每次打包都要根據每篇文章的 meta title (front matter)，去自動生成每篇文章的 svg，讓我可以放在 header 的 og-image。
 
 我參考了 [vueuse](https://github.com/vueuse/vueuse) 產生 og-image 的方法：在 svg 的中間挖空，然後用 node.js 去抓 markdown 的 front matter 填補，最後在輸出成 png 檔案。
 
@@ -232,9 +232,9 @@ video-player：
 
 ## 十、Search Engine Optimization 搜尋引擎優化
 
-以前都沒有做過 SEO 相關的處理，所以對我來說也是非常新鮮
+以前都沒有做過 SEO 相關的處理，所以對我來說也是非常新鮮。
 
-Search Engine Optimization （SEO）搜尋引擎優化，意思就是我再 Google 的搜尋我網站中有的關鍵字，可以出現在搜尋結果中，且排名在前面。
+Search Engine Optimization（SEO）搜尋引擎優化，意思就是我在 Google 的搜尋我網站中有的關鍵字，如：「你好，我叫 Rock，是來自台灣的前端工程師」，可以被搜尋到，且排名靠前面。
 
 如此我就需要一些工具 & 文件來幫我達成，例如：`sitemap.xml`、`robots.txt`、`Google Search Console`。
 
@@ -242,9 +242,11 @@ Search Engine Optimization （SEO）搜尋引擎優化，意思就是我再 Goog
 
 > 網站管理員可以通過該工具了解自己網站的收錄情況並優化其網站的曝光率
 
-自己第一次搞 SEO 才發現，原來 [Google Search Console](https://search.google.com/search-console) 有這個介面可以看自己的網站被 Google 收錄的情況，意思是說，如果沒有被收錄，我都不會出現在 Google 的搜尋結果中
+自己第一次搞 SEO 才發現，原來 [Google Search Console](https://search.google.com/search-console) 有這個介面可以看自己的網站被 Google 收錄的情況，意思是說，**如果沒有被收錄在 Google Search Console 中，我的網站是不會出現在 Google 的搜尋結果中的。**
 
 我要被 Google 收錄，也就代表我需要提交我的 `sitemap.xml` 跟準備好我的 `robots.txt`，
+
+Sitemap 就像是網站中的地圖，可以告訴搜尋引擎你的網站有什麼頁面（網址）可以拜訪。
 
 我的 sitemap: <https://rock070.me/sitemap.xml>
 
