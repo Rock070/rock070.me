@@ -175,7 +175,7 @@ video-player：
 
 我的需求是每次打包都要根據每篇文章的 meta title (front matter)，去自動生成每篇文章的 svg，讓我可以放在 header 的 og-image。
 
-我參考了 [vueuse](https://github.com/vueuse/vueuse) 產生 og-image 的方法：在 svg 的中間挖空，然後用 node.js 去抓 markdown 的 front matter 填補，最後在輸出成 png 檔案。
+我參考了 [vueuse](https://github.com/vueuse/vueuse) 產生 og-image 的方法：在 svg 的中間挖空，然後用 node.js 去抓 markdown 的 front matter 填補，最後再輸出成 png 檔案。
 
 ### 程式碼實作過程
 
