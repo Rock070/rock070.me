@@ -30,6 +30,7 @@ export default defineNuxtConfig({
   css: [
     '@unocss/reset/tailwind.css',
     '~/styles/themes.css',
+    'floating-vue/dist/style.css',
   ],
 
   vite: {
