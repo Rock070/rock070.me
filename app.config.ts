@@ -14,7 +14,7 @@ export default defineAppConfig({
     header: {
       showLinkIcon: false,
       logo: 'Logo',
-      exclude: [''],
+      exclude: ['/playground'],
     },
     footer: {
       credits: {
