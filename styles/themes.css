@@ -4,6 +4,9 @@
   font-family: Inter,ui-sans-serif,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
   --header-height: 64px;
   --footer-height: 82px;
+
+  /* 覆蓋 docus 內建最大寬度變數 */
+  --elements-container-maxWidth: 100vw;
 }
 
 button {

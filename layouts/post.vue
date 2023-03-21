@@ -66,8 +66,11 @@ watch(zenMode, (val) => {
       >
         {{ page?.title }}
       </h1>
+      <h2 class="text-center text-sm opacity-60 mt-4">
+        {{ page?.description }}
+      </h2>
 
-      <span class="flex justify-center items-center space-x-2 text-sm opacity-60">
+      <span class="flex justify-center items-center space-x-2 text-xs opacity-60">
         <time :datetime="page?.date" class="whitespace-nowrap min-w-70px"> {{ date_format }} </time>
         <span>-</span>
         <span class="whitespace-nowrap">{{ durations }} min read</span>
