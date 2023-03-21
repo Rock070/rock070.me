@@ -9,7 +9,7 @@ categories: [Vue]
 [Vue: When a computed property can be the wrong tool](https://dev.to/linusborg/vue-when-a-computed-property-can-be-the-wrong-tool-195j)，「
 當 computed 可能是錯誤的工具」，綜合我對 Vue 的理解，來寫一下筆記。
 
-## computed 快取予懶計算可以降低效能成本
+## computed 快取 & 懶計算可以降低效能成本
 
 computed 非常優美，可以作為響性式屬性的代理 (proxy)，設定 set & get，也可以當作一種唯讀的計算屬性。另外有兩個特性比較可能不會注意到的：
 
