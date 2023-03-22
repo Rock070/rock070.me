@@ -5,7 +5,7 @@ description: 花費 $35,690 汰舊換新，購入我的 MacBook Pro M1 14 吋
 categories: [生活紀錄]
 ---
 
-<img src="https://i.imgur.com/INbUpfk.png" width="600">
+<img src="https://i.imgur.com/INbUpfk.png" width="75%" style="marginLeft: auto; marginRight: auto">
 
 ## 想換電腦的契機
 
