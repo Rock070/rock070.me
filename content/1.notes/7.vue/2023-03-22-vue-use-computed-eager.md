@@ -13,15 +13,19 @@ categories: [Vue]
 
 computed 非常優美，可以作為響性式屬性的代理 (proxy)，設定 set & get，也可以當作一種唯讀的計算屬性。另外有兩個特性比較可能不會注意到的：
 
-1. computed 會在內部建立快取， computed 會去監聽其相依的響應式資料是否有更新，若相依資料有更新，就會記錄為 dirty 並安排重新計算，若資料沒有更新則該屬性的 DOM 會顯示上一次計算好的內容，稱為 computed cache。
-2. computed 會進行 Lazy Evaluation 懶計算（或稱惰性求值），意思是 computed 的 callback 函數僅在「讀取計算值」後才執行，例如畫面上有顯示，或是其他被其他程式碼讀取。白話一點就是說 computed 的 callback 執行，會發生在「被讀取」時，例如在畫面上有使用、被其他程式碼引用，而不是宣告的時候就執行。
+1. computed 會在**內部建立快取**， computed 會去監聽其相依的響應式資料是否有更新，若相依資料有更新，就會記錄為 dirty 並安排重新計算，若資料沒有更新則該屬性在 DOM 會顯示上一次計算好的內容，稱為 **「computed cache」**。
+2. computed 會進行 **Lazy Evaluation 懶計算**（或稱惰性求值），意思是 computed 的 callback 函數僅在「讀取計算值」後才執行，例如畫面上有顯示，或是其他被其他程式碼讀取。白話一點就是說 computed 的 callback 執行，會發生在「被讀取」時，例如在畫面上有使用、被其他程式碼引用，而不是宣告的時候就執行。
 
 因此，computed 因為「快取」與「懶計算」，在節省效能成本上，有很大的優勢。
-如果具有昂貴計算的計算屬性未被任何東西使用，甚至不會完成該昂貴的操作。
+如果具有昂貴計算的計算屬性未被任何東西使用，甚至不會完成該昂貴的計算。
+
+::alert{type="info"}
+昂貴的計算：複雜高的演算法、很高的渲染成本（大元件）、....等等
+::
 
 這是一個 computed 的範例：
 
-```vue
+```vue [computed-demo.vue]
 <script setup>
 const showList = ref(false)
 const newTodo = ref('')
@@ -105,11 +109,11 @@ function addTodo() {
 2. 但因為依賴 `count` 的改變，`isOver100` 這個 computed 屬性被標記為「dirty」，所以必須重新計算。
 3. 但是因為懶計算的原因，`isOver100` 的重新計算只會觸發在當它「被讀取」的時候，在那之前，Vue 只知道他是 dirty，但卻不知道他是仍然返回 `false` 還是改回傳 `true`。
 4. `sortedList`因為依賴了 `isOver100`，當 `isOver100` 被標記為 dirty 時，`sortedList` 也會被標記為 dirty，且也不會馬上觸發重新計算，會等到被讀取的時候才會計算。
-5. 因為 `sortedList` 在 template 內使用，且狀態為 dirty，所以直接觸發了 `isOver100` 的計算與 `sortedList` 自己本身的計算，並觸發重新渲染。
-6. `sortedList` 重新計算，裡面讀取了重新計算仍為 false 的 `isOver100`。
-7. 新的 Virtual DOM 與 template 結果一樣，意味著這一切都不必要，但在上面的過程中，還是觸發了「重新渲染」、「昂貴的 `sortedList` 重新計算」。
+5. 因為 `sortedList` 在 template 內使用，且狀態為 dirty，所以直接觸發了 `sortedList` 與 `isOver100` 的計算，並觸發重新渲染。
+6. `sortedList` 重新計算時，裡面讀取了重新計算仍為 `false` 的 `isOver100`。
+7. 新的 Virtual DOM 與 template 結果一樣，意味著這一切都不必要，但在上面的過程中，還是觸發了「重新渲染」、「 `sortedList` 昂貴的重新計算」。
 
-真正的罪魁禍首是 `isOver100`，因為需要經常計算，但總是回傳計算出相同的值，這是一個相當簡單的計算，但卻無法從 computed 的優勢「快取」與「懶計算」中獲得好處，反而在這個案力中造成了無意義的重新渲染。
+真正的罪魁禍首是 `isOver100`，因為需要經常計算，但總是回傳計算出相同的值，這是一個相當簡單的計算，但卻無法從 computed 的優勢「快取」與「懶計算」中獲得好處，反而在這案例中造成了無意義的重新渲染。
 
 發生這種情況，本質上可能是因為這幾個因素：
 
@@ -126,10 +130,10 @@ function addTodo() {
 
 中文翻譯為「迫切的計算」，簡單的理解就是，去掉懶計算的 computed，在每次依賴更新的時候，都會直接更新返回值，不會等到被讀取。
 
-內部實作非常簡單，就是把 `computed` 改成用 `ref + sync watch`
+內部實作非常簡單，就是把 `computed` 改成用 `ref + watch (flush: sync)`
 
 ::alert{type="info"}
-flush: sync 的意思就是偵測到變更後立即執行，flush 另外還有兩個值可以設定，預設是 pre，在 Vue 更新之前調用，post 在 Vue（Virtual DOM）更新完成後回調。
+**flush**：用來指定 watch 回調函式的執行時間，「sync」 意思是偵測到變更後立即執行。預設是 「pre」，在 Vue 更新之前調用，「post」 在 Vue（Virtual DOM）更新完成後調用。
 ::
 
 ```ts
@@ -169,8 +173,8 @@ vueuse 的版本：[computedEager](https://vueuse.org/shared/computedeager/)
 
 總結一下，什麼時候要選擇 `computed`，什麼時候要選擇 `computedEager` ？
 
-- 當進行複雜的計算時，該計算可以從「快取」與「懶計算」中受益，並且只有在必要的時候才重新計算，使用 `computed`。
-- 在操作簡單，且返回值很少更改時（通常是布林值），使用 `computedEager`。
+- `computed`：當進行複雜的計算時，該計算可以從「快取」與「懶計算」中受益，並且只有在必要的時候才重新計算。
+- `computedEager`：計算簡單，且返回值很少更改時（通常是布林值）。
 
 ## 參考文章
 
