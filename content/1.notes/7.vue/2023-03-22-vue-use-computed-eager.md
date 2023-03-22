@@ -1,7 +1,7 @@
 ---
 date: 2023-03-21 23:56:36
 title: 使用 computedEager 優化渲染效能
-description: 使用 vueuse computedEager 來優化 computed 因為惰性計算的特性，間接導致的無意義重新渲染
+description: 使用 vueuse computedEager 來優化 computed 因為懶計算的特性，間接導致的無意義重新渲染
 categories: [Vue]
 ---
 
@@ -97,19 +97,19 @@ function addTodo() {
 
 但事情並不是這樣的，雖然 `isOver100` 點擊 100 下以前都是 false，但在畫面重繪後的生命週期 `OnUpdated` 裡面 console.log，會發現**每次點擊 count 增加的時候，都會重新渲染一次畫面 ！！！**，**所以當我按下按鈕 101 次，`sortedList` 反轉了，畫面也重新渲染了 101 次**，實際產生了一個效能問題。
 
-原因是因為 `sortedList` 只會知道 `isOver100` 已經重新計算過了，所以會標記為 dirty，但是因為**惰性求值**的特性，會在**讀取時才重新計算**，讓 `sortedList` 安排重新計算，卻不知道結果可能是一樣的，所以只能別無選擇地重新渲染。
+原因是因為 `sortedList` 只會知道 `isOver100` 已經重新計算過了，所以會標記為 dirty，但是因為**懶計算**的特性，會在**讀取時才重新計算**，讓 `sortedList` 安排重新計算，卻不知道結果可能是一樣的，所以只能別無選擇地重新渲染。
 
 我們來一步一步解析一下：
 
 1. 當按鈕被點擊，`count` 增加，元件不會重新渲染，因為 `count` 並沒有在 template 上被引用。
-2. 但因為依賴 `count` 的改變，`isOver100` 這個 computed 屬性被標記為「髒的」，所以必須重新計算。
-3. 但是因為惰性求值的原因，`isOver100` 的重新計算只會觸發在當它「被讀取」的時候，在那之前，Vue 只知道他是髒的，但卻不知道他是仍然返回 `false` 還是改回傳 `true`。
-4. `sortedList`因為依賴了 `isOver100`，當 `isOver100` 被標記為髒的時，`sortedList` 也會被標記為髒的，且也不會馬上觸發重新計算，會等到被讀取的時候才會計算。
-5. 因為 `sortedList` 在 template 內使用，且狀態為髒的，所以直接觸發了 `isOver100` 的計算與 `sortedList` 自己本身的計算，並觸發重新渲染。
+2. 但因為依賴 `count` 的改變，`isOver100` 這個 computed 屬性被標記為「dirty」，所以必須重新計算。
+3. 但是因為懶計算的原因，`isOver100` 的重新計算只會觸發在當它「被讀取」的時候，在那之前，Vue 只知道他是 dirty，但卻不知道他是仍然返回 `false` 還是改回傳 `true`。
+4. `sortedList`因為依賴了 `isOver100`，當 `isOver100` 被標記為 dirty 時，`sortedList` 也會被標記為 dirty，且也不會馬上觸發重新計算，會等到被讀取的時候才會計算。
+5. 因為 `sortedList` 在 template 內使用，且狀態為 dirty，所以直接觸發了 `isOver100` 的計算與 `sortedList` 自己本身的計算，並觸發重新渲染。
 6. `sortedList` 重新計算，裡面讀取了重新計算仍為 false 的 `isOver100`。
 7. 新的 Virtual DOM 與 template 結果一樣，意味著這一切都不必要，但在上面的過程中，還是觸發了「重新渲染」、「昂貴的 `sortedList` 重新計算」。
 
-真正的罪魁禍首是 `isOver100`，因為需要經常計算，但總是回傳計算出相同的值，這是一個相當簡單的計算，但卻無法從 computed 的優勢「快取」與「惰性求值」中獲得好處，反而在這個案力中造成了無意義的重新渲染。
+真正的罪魁禍首是 `isOver100`，因為需要經常計算，但總是回傳計算出相同的值，這是一個相當簡單的計算，但卻無法從 computed 的優勢「快取」與「懶計算」中獲得好處，反而在這個案力中造成了無意義的重新渲染。
 
 發生這種情況，本質上可能是因為這幾個因素：
 
@@ -124,9 +124,7 @@ function addTodo() {
 
 ### ComputedEager
 
-這個方法在開源專案 Vue Use 中被提出：[computedEager - vueuse](https://vueuse.org/shared/computedeager/)
-
-中文翻譯為「迫切的計算」，簡單的理解就是，去掉惰性計算的 computed，在每次依賴更新的時候，都會直接更新返回值，不會等到被讀取。
+中文翻譯為「迫切的計算」，簡單的理解就是，去掉懶計算的 computed，在每次依賴更新的時候，都會直接更新返回值，不會等到被讀取。
 
 內部實作非常簡單，就是把 `computed` 改成用 `ref + sync watch`
 
@@ -149,7 +147,9 @@ export function eagerComputed(fn) {
 }
 ```
 
-那在上面的 `counter > 100` 反轉陣列的範例中，可以把 `isOver100` 更換成 `computedEager`，因為即時更新的關係，所以 `sortedList` 就很快可以知道依賴項沒有更新，所以就不會標記為「髒的」，也不會觸發「重新計算」跟「重新渲染」。
+vueuse 的版本：[computedEager](https://vueuse.org/shared/computedeager/)
+
+那在上面的 `counter > 100` 反轉陣列的範例中，可以把 `isOver100` 更換成 `computedEager`，因為即時更新的關係，所以 `sortedList` 就很快可以知道依賴項沒有更新，所以就不會標記為「 dirty」，也不會觸發「重新計算」跟「重新渲染」。
 
 可以看這個修正版的 [SFC Playground](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdCBzZXR1cD5cbiAgaW1wb3J0IHsgcmVmLCByZWFjdGl2ZSwgc2hhbGxvd1JlZiwgcmVhZG9ubHksIGNvbXB1dGVkLCBvblVwZGF0ZWQsIHdhdGNoRWZmZWN0IH0gZnJvbSAndnVlJ1xuXG4gIGZ1bmN0aW9uIGVhZ2VyQ29tcHV0ZWQoZm4pIHtcbiAgICBjb25zdCByZXN1bHQgPSBzaGFsbG93UmVmKClcbiAgICB3YXRjaEVmZmVjdCgoKSA9PiB7XG4gICAgICByZXN1bHQudmFsdWUgPSBmbigpXG4gICAgfSwgXG4gICAge1xuICAgICAgZmx1c2g6ICdzeW5jJyAvLyBuZWVkZWQgc28gdXBkYXRlcyBhcmUgaW1tZWRpYXRlLlxuICAgIH0pXG5cbiAgICByZXR1cm4gcmVhZG9ubHkocmVzdWx0KVxuICB9XG4gIFxuICBjb25zdCBsaXN0ID0gcmVhY3RpdmUoWzEsMiwzLDQsNV0pXG4gIFxuICBjb25zdCBjb3VudCA9IHJlZigwKVxuICBmdW5jdGlvbiBpbmNyZWFzZSgpIHtcbiAgICBjb3VudC52YWx1ZSsrXG4gIH1cbiAgXG4gIGNvbnN0IGlzT3ZlcjEwMCA9IGVhZ2VyQ29tcHV0ZWQoKCkgPT4gY291bnQudmFsdWUgPiAxMDApXG4gIFxuICBjb25zdCBzb3J0ZWRMaXN0ID0gY29tcHV0ZWQoKCkgPT4ge1xuICAgIC8vIGltYWdpbmUgdGhpcyB0byBiZSBleHBlbnNpdmVcbiAgICByZXR1cm4gaXNPdmVyMTAwLnZhbHVlID8gWy4uLmxpc3RdLnJldmVyc2UoKSA6IFsuLi5saXN0XVxuICB9KVxuICBcbiAgb25VcGRhdGVkKCgpID0+IHtcbiAgICBjb25zb2xlLmxvZygnY29tcG9uZW50IHJlLXJlbmRlcmVkIScpXG4gIH0pXG4gIFxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPGJ1dHRvbiBAY2xpY2s9XCJpbmNyZWFzZVwiPlxuICAgIENsaWNrIG1lXG4gIDwvYnV0dG9uPlxuICA8YnI+XG4gIDxoMz5cbiAgICBMaXN0XG4gIDwvaDM+XG4gIDx1bD5cbiAgICA8bGkgdi1mb3I9XCJpdGVtIGluIHNvcnRlZExpc3RcIj5cbiAgICAgIHt7IGl0ZW0gfX1cbiAgICA8L2xpPlxuICA8L3VsPlxuPC90ZW1wbGF0ZT4ifQ==)，
 
@@ -169,7 +169,7 @@ export function eagerComputed(fn) {
 
 總結一下，什麼時候要選擇 `computed`，什麼時候要選擇 `computedEager` ？
 
-- 當進行複雜的計算時，該計算可以從「快取」與「惰性計算」中受益，並且只有在必要的時候才重新計算，使用 `computed`。
+- 當進行複雜的計算時，該計算可以從「快取」與「懶計算」中受益，並且只有在必要的時候才重新計算，使用 `computed`。
 - 在操作簡單，且返回值很少更改時（通常是布林值），使用 `computedEager`。
 
 ## 參考文章
