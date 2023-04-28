@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { useContent, useLocalStorage, useMounted, useRuntimeConfig } from '#imports'
+import { useContent, useRuntimeConfig } from '#imports'
 import getReadingTime from '~/helpers/getReadingTime'
 
 import dateFormatter from '~/utils/dateFormatter'
@@ -8,7 +7,6 @@ import dateFormatter from '~/utils/dateFormatter'
 const config = useRuntimeConfig()
 const { page } = await useContent()
 
-const isMounted = useMounted()
 const date_format = computed(() => {
   const date = page.value.date
   return date ? dateFormatter(new Date(date)) : ''
@@ -40,20 +38,6 @@ useSeoMeta({
 })
 
 useContentHead(page)
-
-const zenMode = useLocalStorage('zen-mode', false)
-
-watch(zenMode, (val) => {
-  if (process.server)
-    return
-
-  if (val)
-    document.querySelector('body')?.classList.add('zen-mode')
-
-  else document.querySelector('body')?.classList.remove('zen-mode')
-}, {
-  immediate: true,
-})
 </script>
 
 <template>
@@ -79,34 +63,6 @@ watch(zenMode, (val) => {
         <slot />
       </div>
     </div>
-    <ClientOnly>
-      <Teleport v-if="isMounted" to=".toc">
-        <button
-          v-tooltip="'專注模式'"
-          type="button"
-          aria-label="zen-mode"
-          class="hidden lg:inline-block lg:fixed lg:bottom-13vh lg:right-5vw"
-          @click="zenMode = !zenMode"
-        >
-          <Icon
-            name="zen-mode"
-            :icon="zenMode ? 'ri:layout-right-line' : 'ri:layout-right-2-line'"
-          />
-        </button>
-      </Teleport>
-    </ClientOnly>
   </DocsPageLayout>
   <AppFooter />
 </template>
-
-<style>
-.zen-mode {
-  .aside-nav, .toc {
-    --at-apply: opacity-0;
-    &:hover {
-      --at-apply: opacity-100;
-      --at-apply: transition-opacity;
-    }
-  }
-}
-</style>
