@@ -51,18 +51,19 @@ function dragMove(e: MouseEvent) {
   }
 }
 ```
-
+<!-- 
 有小數點的拖曳
 
-::div
-  :video-player{src="video/vue-sfc-playground-2.mov"}
+
+::div 
+  :video-player{src="https://www.youtube.com/watch?v=Ki1mWUAOIp8"}
 ::
 
 沒有小數點的拖曳
 
 ::div
-  :video-player{src="video/vue-sfc-playground-1.mov"}
-::
+  :video-player{src="https://www.youtube.com/watch?v=OYb0_ORu3cg"}
+:: -->
 
 ## 參考文章
 
