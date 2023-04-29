@@ -35,7 +35,7 @@ console.log(~~-2.2) // -2
 - 正負數邏輯差異需注意
 
 ::alert{type=info}
-補充： [Vue SFC Playground](https://github.com/vuejs/repl/blob/main/src/SplitPane.vue#L40) 用此來計算拖曳視窗的寬度比例，永遠不會出現小數點
+補充： [Vue SFC Playground](https://github.com/vuejs/repl/blob/main/src/SplitPane.vue#L40) 用此來計算拖曳視窗的寬度比例，永遠不會出現小數點，藉此將拖曳的觸發範圍拉大（拉的範圍超過整數，才會作動）而不這麼敏感。
 ::
 
 ```ts
