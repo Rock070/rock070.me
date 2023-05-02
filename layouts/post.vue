@@ -59,10 +59,22 @@ useContentHead(page)
         <span>-</span>
         <span class="whitespace-nowrap">{{ durations }} min read</span>
       </span>
-      <div>
+      <div class="post">
         <slot />
       </div>
     </div>
   </DocsPageLayout>
   <AppFooter />
 </template>
+
+<style>
+.post .video-player {
+  width: 95%;
+  aspect-ratio: 16/9;
+}
+
+.post .video-player img {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+</style>
