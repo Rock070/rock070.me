@@ -1,7 +1,7 @@
 ---
-date: 2023-04-30 03:43:34
+date: 2023-04-17 03:43:34
 title: JS 雙波浪符（~~）
-description:
+description: JavaScript NOT 運算符在實際場景的運用案例
 categories: [JavaScript]
 ---
 

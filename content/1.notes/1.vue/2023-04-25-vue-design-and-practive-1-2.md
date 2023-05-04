@@ -1,7 +1,7 @@
 ---
-date: 2023-04-11 21:50:06
+date: 2023-04-18 21:50:06
 title: 「Vue 設計與實現」1-2 框架設計的核心要素
-description: 閱讀由 Vue 核心成員霍春陽寫作的 「Vue.js 設計與實現」之讀書心得
+description: 「Vue.js 設計與實現」之讀書筆記與整理
 categories: [Vue]
 ---
 
@@ -149,12 +149,11 @@ Vue 打包後，可以看到有非常多產出
 在 vue 的 index.js 中，有以下程式碼，透過 `process.env.NODE_ENV === 'production'` 來區分使用哪個環境的打包產物。
 
 ```js [index.js]
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production')
   module.exports = require('./dist/vue.cjs.prod.js')
-}
-else {
+
+else
   module.exports = require('./dist/vue.cjs.js')
-}
 ```
 
 另外，如何區分不同的模組規範？其實一般 package.json中的 main 和 module 来指定的

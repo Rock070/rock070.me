@@ -1,7 +1,7 @@
 ---
 date: 2023-04-10 21:43:06
 title: 「Vue 設計與實現」學習重點
-description: 閱讀由 Vue 核心成員霍春陽寫作的 「Vue.js 設計與實現」之讀書心得
+description: 「Vue.js 設計與實現」之讀書筆記與整理
 categories: [Vue]
 ---
 
