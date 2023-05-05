@@ -125,7 +125,9 @@ effectRegister(() => {
 })
 
 setTimeout(() => {
-  proxy.notExist = 'goodbye' // 這邊讀取不存在的屬性，仍會執行整個 proxy 副作用收集的回調 `bucket.forEach(fn => fn()`
+  proxy.text = 'goodbye'
+
+  // proxy.notExist = 'goodbye' 這邊讀取不存在的屬性，仍會執行整個 proxy 副作用收集的回調 `bucket.forEach(fn => fn()`
 }, 2000)
 ```
 
