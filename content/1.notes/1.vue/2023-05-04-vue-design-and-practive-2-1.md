@@ -1,6 +1,6 @@
 ---
 date: 2023-05-04 23:44:06
-title: 「Vue 設計與實現」響應系統原理（一）
+title: 「Vue 設計與實現」響應系統原理（一）使用 Proxy 簡單設計一個響應系統
 description: 「Vue.js 設計與實現」之讀書筆記與整理 - 使用 Proxy 簡單設計一個響應系統
 categories: [Vue]
 ---
@@ -29,10 +29,15 @@ function getVal() {
 
 ## 響應式資料
 
-響應式資料的概念是，當一筆資料在某些程式碼內被讀取了，則這些讀取的程式碼，應該被收集起來，當該資料改變後，重新執行一次收集起來的有讀取到該資料的程式碼，例如如，下面的 effect 函式中，`document.body.innerText = obj.text` 讀取了 `obj.text`，所以當 `obj.text` 更改後，預期要重新執行一次 `document.body.innerText = obj.text` 這個副作用程式碼。
+響應式資料的概念是，當一筆資料在某些程式碼內被讀取了，則這些讀取的程式碼，應該被收集起來。
 
-- 當副作用函式 effect 執行的時候，會觸發 `obj.text` 的**讀取**（**get**）操作。
-- 當修改 `obj.text` 的時候，會出發 `obj.text` 收集起來的**設值**（**set**）操作。
+![get](https://i.imgur.com/YIa8AGO.png)
+
+當該資料改變後，重新執行一次收集起來的有讀取到該資料的程式碼，
+
+![set](https://i.imgur.com/pyMgyqu.png)
+
+例如下面的 effect 函式中，`document.body.innerText = obj.text` 讀取了 `obj.text`，所以當 `obj.text` 更改後，預期要重新執行一次 `document.body.innerText = obj.text` 這個副作用程式碼。
 
 ```js [effect.js]
 const obj = { text: 'hello world' }
@@ -41,6 +46,9 @@ function effect() {
   document.body.innerText = obj.text
 }
 ```
+
+- 當副作用函式 effect 執行的時候，會觸發 `obj.text` 的**讀取**（**get**）操作。
+- 當修改 `obj.text` 的時候，會出發 `obj.text` 收集起來的**設值**（**set**）操作。
 
 故我們需要設計一個攔截器（Proxy），可以在我們讀取時（get）實現收集副作用程式碼，設值（get）時執行副作用程式碼。
 

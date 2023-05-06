@@ -1,6 +1,6 @@
 ---
 date: 2023-05-05 00:44:06
-title: 「Vue 設計與實現」響應系統原理（二）
+title: 「Vue 設計與實現」響應系統原理（二）- 提高響應系統對副作用函式收集的彈性
 description: 「Vue.js 設計與實現」之讀書筆記與整理 - 提高響應系統對副作用函式收集的彈性
 categories: [Vue]
 ---
@@ -100,6 +100,7 @@ function effectRegister(fn) {
   fn() // 執行
 }
 
+// 桶
 const bucket = new Set()
 
 const data = { text: 'hello world', age: 22 }
@@ -131,4 +132,6 @@ setTimeout(() => {
 }, 2000)
 ```
 
-解決了函式彈性的問題，上方的程式碼仍有一個問題，若我對 proxy 不存在的屬性設值，如 `proxy.notExist = 'goodbye'`，按照目前的設計，仍會執行 set 當中的副作用回調 `bucket.forEach(fn => fn())`，但響應系統理想的設計，應該是**只收集被讀取的屬性，而不是整個物件被收集**，所以我們需要對「桶」做重新設計。
+解決了函式彈性的問題，上方的程式碼仍有一個問題：**proxy 的每一個屬性會共享所有的副作用**。
+
+若我對 proxy 不存在的屬性設值，如 `proxy.notExist = 'goodbye'`，按照目前的設計，仍會執行 set 當中的副作用回調 `bucket.forEach(fn => fn())`，但響應系統理想的設計，應只**收集被讀取的屬性，而不是整個物件被收集**，所以我們需要對「桶」`net Set()`做重新設計。
