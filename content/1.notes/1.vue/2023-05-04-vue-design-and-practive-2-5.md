@@ -9,7 +9,6 @@ categories: [Vue]
 關聯： [[「Vue 設計與實現」第二篇 - 響應系統的作用與實現]]
 ::
 
-
 ## 巢狀使用的情境
 
 當 effectRegister 註冊內包了一個 effectRegister，就是所謂的巢狀
