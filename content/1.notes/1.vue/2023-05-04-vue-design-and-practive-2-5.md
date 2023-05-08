@@ -1,6 +1,6 @@
 ---
 date: 2023-05-07 01:44:06
-title: 「Vue 設計與實現」響應系統原理（四）- 巢狀的 effect
+title: 「Vue 設計與實現」響應系統原理（五）- 巢狀的 effect
 description: 「Vue.js 設計與實現」之讀書筆記與整理 - 巢狀的 effect
 categories: [Vue]
 ---
@@ -8,6 +8,45 @@ categories: [Vue]
 ::Association
 關聯： [[「Vue 設計與實現」第二篇 - 響應系統的作用與實現]]
 ::
+
+
+## 巢狀使用的情境
+
+當 effectRegister 註冊內包了一個 effectRegister，就是所謂的巢狀
+
+```js [nested.js]
+effectRegister(() => {
+  effectRegister(() => { /* ... */ })
+  /* ... */
+})
+```
+
+在 Vue.js 內可以看作是父元件包著子元件，Foo 元件內要渲染 Bar 元件
+
+```js [nested-vue.js]
+// Bar 元件
+const Bar = {
+  render() { /* ... */ },
+}
+// Foo 组件渲染了 Bar 元件
+const Foo = {
+  render() {
+    return <Bar /> // jsx 語法
+  },
+}
+```
+
+相當於
+
+```js [nested-vue.js]
+effectRegister(() => {
+  Foo.render()
+  // 巢狀
+  effectRegister(() => {
+    Bar.render()
+  })
+})
+```
 
 ## 巢狀導致收集到錯誤的 effect
 
@@ -70,7 +109,13 @@ function effectRegister(fn) {
 
 ## 重新設計 activeEffect
 
-為了解決這個問題，我們會需要一個 stack 變數： `activeEffectStack`，在執行副作用函式前收集起來，執行完 pop 出來，並切換 activeEffect 到前一個 effect。
+為了解決這個問題，我們會需要一個 stack 變數： `activeEffectStack`，在執行副作用函式前收集起來，stack 底部儲存的就是第一層副作用函式，stack 頂部儲存的就是內部副作用函數：
+
+![](https://i.imgur.com/VxENd8N.png)
+
+執行完 pop 出來，並切換 activeEffect 到前一個 effect。
+
+![](https://i.imgur.com/YVkethW.png)
 
 依照 stack 的**後進先出**的設計，就可以解決**巢狀執行帶來被覆寫的問題**。
 
