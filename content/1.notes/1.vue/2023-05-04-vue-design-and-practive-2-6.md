@@ -1,5 +1,5 @@
 ---
-date: 2023-05-07 01:44:06
+date: 2023-05-09 21:44:06
 title: 「Vue 設計與實現」響應系統原理（六）- 避免無限遞迴
 description: 「Vue.js 設計與實現」之讀書筆記與整理 - 避免無限遞迴
 categories: [Vue]
@@ -100,7 +100,7 @@ function cleanup(effectFn) {
   effectFn.deps.length = 0
 }
 
-const data = { text: 'hello world', age: 22 }
+const data = { age: 1 }
 
 const bucket = new WeakMap()
 const proxy = new Proxy(data, {
@@ -144,7 +144,7 @@ function trigger(target, key) {
   const effectToRun = new Set()
   effects.forEach((effectfn) => {
     if (effectfn !== activeEffect)
-      effectToRun.add(effectToRun)
+      effectToRun.add(effectfn)
   })
 
   effectToRun && effectToRun.forEach(fn => fn())
@@ -153,6 +153,6 @@ function trigger(target, key) {
 effectRegister(() => {
   console.log('effectRegister')
 
-  proxy.text = `${proxy.text}123`
+  proxy.age++
 })
 ```
