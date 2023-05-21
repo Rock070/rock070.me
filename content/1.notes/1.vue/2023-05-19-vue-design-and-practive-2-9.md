@@ -1,5 +1,5 @@
 ---
-date: 2023-05-14 20:44:06
+date: 2023-05-19 20:44:06
 title: 「Vue 設計與實現」響應系統原理（九）- 透過調度器、懶執行實現 computed 計算屬性 
 description: 「Vue.js 設計與實現」之讀書筆記與整理 - 透過 effectRegister 的調度器、懶執行特性，來實現 computed 計算屬性的封裝，並在內部建立快取功能節省計算成本
 categories: [Vue]
