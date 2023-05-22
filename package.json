@@ -15,7 +15,7 @@
     "typecheck": "nuxi typecheck"
   },
   "dependencies": {
-    "@nuxt-themes/docus": "^1.11.0",
+    "@nuxt-themes/docus": "^1.12.0",
     "@nuxt/content": "^2.6.0",
     "@unocss/nuxt": "^0.51.8",
     "@unocss/reset": "^0.51.8",
