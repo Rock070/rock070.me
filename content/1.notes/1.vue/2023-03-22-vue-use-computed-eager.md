@@ -133,11 +133,12 @@ function addTodo() {
 內部實作非常簡單，就是把 `computed` 改成用 `ref + watch (flush: sync)`
 
 ::alert{type="info"}
-**flush**：用來指定 watch 回調函式的執行時間，「sync」 意思是偵測到變更後立即執行。預設是 「pre」，在 Vue 更新之前調用，「post」 在 Vue（Virtual DOM）更新完成後調用。
+**flush**：用來指定 watch 回調函式的執行時間，「sync」 意思是偵測到變更後立即執行。預設是 「pre」，在 Vue 更新之前調用，「post」 在 DOM 更新完成後調用。
 ::
 
 ```ts
 import { readonly, shallowRef, watchEffect } from 'vue'
+
 export function eagerComputed(fn) {
   const result = shallowRef()
   watchEffect(() => {
