@@ -198,3 +198,144 @@ proxy.age++
 ```
 
 [完整程式碼 - watch - 新值與舊值 - stackblitz](https://stackblitz.com/edit/js-9feci7?file=index.js)
+
+## 立即執行的 watch
+
+預設情況下，一個 watch 的回調只會在響應式數據發生變化時才執行：
+
+```js [watch.js]
+// 回調函數只有在響應式數據 proxy 後續發生變化時才執行
+watch(proxy, () => {
+  console.log('變化了')
+})
+```
+
+在 Vue.js 中可以透過 options.immediate 來指定回調是否要立即執行：
+
+```js [watch.js]
+watch(obj, () => {
+  console.log('變化了')
+}, {
+// 回調函數會在 watch 創建時立即執行一次
+  immediate: true
+})
+``` 
+
+要實現 immediate 非常簡單，響應式資料變更後執行的函式與立即執行函式，其實要執行的東西都是一樣的，只需要將 scheduler 原本做的事情，封裝成一個 job 函式，就可以拿來使用：
+
+::code-group
+
+```js [Before]
+function watch(source, cb, options = {}) {
+  let getter
+  let oldValue, newValue
+
+  if (typeof source === 'function')
+    getter = source
+  else getter = () => traversal(source)
+
+  const effectFn = effectRegister(() => getter(), {
+    lazy: true,
+    // 需要把 scheduler 執行的內容，封裝成 job 函式
+    scheduler() {
+      newValue = effectFn()
+      cb(newValue, oldValue)
+      oldValue = newValue
+    },
+  })
+
+  oldValue = effectFn()
+}
+```
+
+```js [After]
+function watch(source, cb, options = {}) {
+  let getter
+  let oldValue, newValue
+
+  if (typeof source === 'function')
+    getter = source
+  else getter = () => traversal(source)
+
+  // 封裝 scheduler 調度函數為一個獨立的 job 函數
+  const job = () => {
+    newValue = effectFn()
+    cb(newValue, oldValue)
+    oldValue = newValue
+  }
+
+  const effectFn = effectRegister(() => getter(), {
+    lazy: true,
+    scheduler: job,
+  })
+
+  // 當 immediate 為 true 時立即執行 job，從而觸發回調執行
+  if (options.immediate)
+    job()
+  else oldValue = effectFn()
+}
+```
+
+::
+
+如此一來便實現了 watch 的立即執行功能。
+
+## 使用 flush 來指定 watch 回調的執行時機
+
+在 Vue.js 3 中 watch 可以使用 flush 選項來指定執行回調的時機
+
+```js [watch.js]
+watch(proxy, () => {
+  console.log('變化了')
+}, {
+// 回調函數會在 組件更新前 執行
+  flush: 'pre' // 還可以指定為 'post' | 'sync'
+})
+```
+
+flush 可指定的三個執行時機：
+
+- pre: 組件更新前執行 (預設)
+- sync: 偵測到變更後立即執行
+- post: 組件更新後執行，能訪問被 Vue 更新之後的 DOM
+
+當 flush 的值為 `post` 時，代錶調度函數需要將副作用函式放到一個**微任務隊列**中，並等待 DOM 更新結束後再執行，如以下程式碼為例：
+
+```js [watch.js]
+function watch(source, cb, options = {}) {
+  let getter
+  let oldValue, newValue
+
+  if (typeof source === 'function')
+    getter = source
+  else getter = () => traversal(source)
+
+  const job = () => {
+    newValue = effectFn()
+    cb(newValue, oldValue)
+    oldValue = newValue
+  }
+
+  const effectFn = effectRegister(() => getter(), {
+    lazy: true,
+
+    // 在調度函數中判斷 flush 是否為 'post'，如果是，將其放到微任務隊列中執行
+    scheduler() {
+      if (options.flush === 'post') {
+        const p = Promise.resolve(
+          p.then(job)
+        )
+      }
+      else {
+        job()
+      }
+    }
+  })
+
+  if (options.immediate)
+    job()
+  else oldValue = effectFn()
+}
+```
+
+在調度器函數內檢測 options.flush 的值是否為 post，如果是，則將 job 函數放到微任務隊列中，從而實現非同步延遲執行。
