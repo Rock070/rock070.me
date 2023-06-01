@@ -23,7 +23,7 @@ categories: [Vue]
 ::code-group
 
 ```js [懶執行]
-effect(
+effectRegister(
   // 指定了 lazy 選項，這個函數不會立即執行
   () => {
     console.log(obj.foo)
@@ -35,7 +35,7 @@ effect(
 ```
 
 ```js [立即執行]
-effect(
+effectRegister(
   // 這個函數會立即執行
   () => {
     console.log(obj.foo)
