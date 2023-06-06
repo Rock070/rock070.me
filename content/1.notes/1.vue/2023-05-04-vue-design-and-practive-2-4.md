@@ -127,9 +127,10 @@ function track(target, key) {
 
 根據 2023 ECMA Script 規範當中提到，在調用 forEach 遍歷 Set 集合時，如果在訪問某個值後將其刪除，然後在 forEach 調用完成之前重新添加該值，則會重新訪問該值。
 
-::alert{type="info"}s
+::alert{type="info"}
 Each value is normally visited only once. However, a value will be revisited if it is deleted after it has been visited and then re-added before the forEach call completes.
-
+<br>
+<br>
 每個值通常只被訪問一次。但是，如果在訪問某個值後將其刪除，然後在 forEach 調用完成之前重新添加該值，則會重新訪問該值。
 ::
 
