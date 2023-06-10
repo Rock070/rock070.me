@@ -49,3 +49,7 @@ https://sfc.vuejs.org/#eNqVU8GK2zAQ/ZVZsRAHEovtMXUCpRR6KfTWi6DrOuPYW1tSR3J6MP73z
 ### 第八關
 
 （覆蓋 reactive 物件（失去響應））
+
+### 第九關
+
+（DOM 尚未渲染前調用，結果不如預期）
