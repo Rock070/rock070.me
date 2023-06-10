@@ -2,7 +2,7 @@ import { useToggle } from '@vueuse/core'
 
 import { onMounted } from 'vue'
 
-const useToggleDarkMode = () => {
+function useToggleDarkMode() {
   const [isDark, useToggleDark] = useToggle(true)
 
   const toggleDarkClass = (val: boolean) => {

@@ -20,7 +20,7 @@ interface ReadingTime {
 
 const READ_PER_MIN = 550 // 假設一分鐘閱讀 550 字
 
-const getwords = (body: Group | undefined) => {
+function getwords(body: Group | undefined) {
   let collect = ''
   const goCollect = (node: Group | undefined) => {
     if (!node)
@@ -38,7 +38,7 @@ const getwords = (body: Group | undefined) => {
 
   return collect
 }
-const getReadingTime = (body: Group | undefined): ReadingTime => {
+function getReadingTime(body: Group | undefined): ReadingTime {
   const charactors = getwords(body)
   const words = [...new Intl.Segmenter('zh-tw', { granularity: 'word' }).segment(charactors)].length
   const char = [...new Intl.Segmenter().segment(charactors)].length

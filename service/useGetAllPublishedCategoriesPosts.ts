@@ -4,7 +4,7 @@ import useCache from '@/composables/useCache'
 
 import dateFormatter from '~/utils/dateFormatter'
 
-const transform = (data: MyCustomParsedContent[]) => {
+function transform(data: MyCustomParsedContent[]) {
   if (!data)
     return []
 
@@ -36,7 +36,7 @@ const transform = (data: MyCustomParsedContent[]) => {
     })
 }
 
-const useGetAllPublishedCategoriesPosts = () => {
+function useGetAllPublishedCategoriesPosts() {
   const contentQuery = queryContent()
 
   const getAllPublishedPosts = () =>

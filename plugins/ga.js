@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable prefer-rest-params */
 import { defineNuxtPlugin, onNuxtReady, useHead } from '#app'
+
 export default defineNuxtPlugin(() => {
   onNuxtReady(() => {
     useHead({

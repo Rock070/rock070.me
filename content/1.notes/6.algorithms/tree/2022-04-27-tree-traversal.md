@@ -87,7 +87,7 @@ const tree = {
 [完成程式碼 - GitHub](https://github.com/Rock070/algorithms-data-structure-repo/tree/master/data-structure/tree/BFS)
 
 ```js
-const BFTT = (root) => {
+function BFTT(root) {
   const result = []
   const queue = []
 
@@ -134,7 +134,7 @@ console.log(result)
 實作方法：先遇到的節點先走訪，並採用遞迴方式，若有 left, right 節點則繼續遞迴。
 
 ```js
-const preOrder = (root) => {
+function preOrder(root) {
   const result = []
 
   const traversal = (node) => {
@@ -166,7 +166,7 @@ const preOrder = (root) => {
 實作方法：越左的節點先走訪，並採用遞迴方式，若有 left, right 節點則繼續遞迴。
 
 ```js
-const InOrder = (root) => {
+function InOrder(root) {
   const result = []
 
   const traversal = (node) => {
@@ -196,7 +196,7 @@ const InOrder = (root) => {
 實作方法：越左的節點先走訪，並採用遞迴方式，若有 left, right 節點則繼續遞迴。
 
 ```js
-const PostOrder = (root) => {
+function PostOrder(root) {
   const queue = []
 
   const traversal = (node) => {

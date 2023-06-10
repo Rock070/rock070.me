@@ -11,7 +11,7 @@ interface Options {
   format: Intl.DateTimeFormatOptions
 }
 
-const dateFormatter = (date: Date, options?: Options) => {
+function dateFormatter(date: Date, options?: Options) {
   if (!isValidateDate(date))
     return ''
   let implOption = defaultOptions

@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-const useArray = (arr: unknown[]) => {
+function useArray(arr: unknown[]) {
   const clone = ref([...arr])
 
   const swap = (val: any, index: number) => {

@@ -4,7 +4,7 @@ import getReadingTime from '~/helpers/getReadingTime'
 import group from '~/utils/group'
 import dateFormatter from '~/utils/dateFormatter'
 
-const transform = (data: MyCustomParsedContent[]) => {
+function transform(data: MyCustomParsedContent[]) {
   if (!data)
     return []
   const clone = [...data]
@@ -36,7 +36,7 @@ const transform = (data: MyCustomParsedContent[]) => {
     })
 }
 
-const useGetAllPublishedPosts = () => {
+function useGetAllPublishedPosts() {
   const contentQuery = queryContent()
 
   const getAllPublishedPosts = () => contentQuery

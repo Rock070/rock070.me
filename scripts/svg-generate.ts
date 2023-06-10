@@ -1,4 +1,5 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
+import { Buffer } from 'node:buffer'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import fm from 'front-matter'
@@ -10,7 +11,7 @@ import type { MyCustomParsedContent as BlogPost } from '~/types/query'
 
 const ogSVg = fs.readFileSync('./scripts/og-template.svg', 'utf-8')
 
-const strSlice = (str: string, num = 22) => {
+function strSlice(str: string, num = 22) {
   const { length: len } = str
   const result: string[] = []
   const time = Math.ceil(len / num)
@@ -45,7 +46,7 @@ async function generateSVG(meta: BlogPost, output: string) {
 const DIST_PATH = resolve(__dirname, '../public/og-images')
 const POSTS_PATH = ['content/1.notes/**/*.md', 'content/2.thinks/**/*.md', 'content/index.md']
 
-const getAllPostMeta = async () => {
+async function getAllPostMeta() {
   const postsPaths = await Promise.all(POSTS_PATH.map(async p => await fg(p))).then(res => res.flat())
   const postsFrontMatterPromises = postsPaths.map(async p =>
     await fs.readFile(p, 'utf-8')

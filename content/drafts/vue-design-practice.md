@@ -12,11 +12,11 @@ Tree-Shaking 依賴 ESM 的靜態結構，所以想要實現 Tree-Shaking，就�
 
 ```js
 new webpack.DefinePlugin({
-  __DEV__: JSON.stringify(false),
-  PRODUCTION: JSON.stringify(true),
-  VERSION: JSON.stringify('5fa3b9'),
+  '__DEV__': JSON.stringify(false),
+  'PRODUCTION': JSON.stringify(true),
+  'VERSION': JSON.stringify('5fa3b9'),
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-});
+})
 ```
 
 ### 2.4 框架應該輸出怎樣的產物
@@ -36,16 +36,14 @@ todo: 兩者差異
 
 ```js
 // browser
-if (__DEV__) {
-  warn(`useCssModule() is not supported in the global build`)
-}
+if (__DEV__)
+  warn('useCssModule() is not supported in the global build')
 ```
 
 ```js
 // bundler
-if (process.env.NODE_ENV !== 'production') {
-  warn(`useCssModule() is not supported in the global build`)
-}
+if (process.env.NODE_ENV !== 'production')
+  warn('useCssModule() is not supported in the global build')
 ```
 
 ```json

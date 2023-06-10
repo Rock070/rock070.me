@@ -1,7 +1,8 @@
 import { ref } from 'vue'
+
 type InitialCache = Record<string, any[] | null> | {}
 
-const useCache = (initial: InitialCache = {}) => {
+function useCache(initial: InitialCache = {}) {
   const cache = ref({ ...initial })
   const update = (key: string, val: any) => {
     if (!cache.value[key]) {

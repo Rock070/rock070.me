@@ -32,7 +32,7 @@ Linked List 連結串列，是資料結構中是常見、基本的資料型態�
 先定義一個 Node，擁有 value 與 next(等於 Pointer，指向下一個 Node) 屬性
 
 ```js
-const Node = (value) => {
+function Node(value) {
   return {
     value,
     next: null
@@ -43,7 +43,7 @@ const Node = (value) => {
 再來定義一個 Linked List，擁有 length(連結長度) 與 head（指向第一個 Node）屬性
 
 ```js
-const LinkedList = () => {
+function LinkedList() {
   const head = null
   const length = 0
   return {
@@ -71,7 +71,7 @@ removeAt
 在連結的結尾加上一個 Node
 
 ```js
-const push = (value) => {
+function push(value) {
   // 建立一個 Node
   const newNode = Node(value)
   // 當連結內沒有 Node 的時候，指定新的 Node 為第一個 Node
@@ -94,7 +94,7 @@ const push = (value) => {
 把最後一個 Node 排除
 
 ```js
-const pop = () => {
+function pop() {
   // 當 Linked List 沒有 Node 的時候返回 null
   if (head === null)
     return null
@@ -122,7 +122,7 @@ const pop = () => {
 印出 Linked List 內所有的值
 
 ```js
-const printAll = () => {
+function printAll() {
   // 沒有節點則印出 nothing
   if (head === null) {
     console.log('Nothing in this linked list')
@@ -142,7 +142,7 @@ const printAll = () => {
 將 Linked List 的第一個節點移除，只需要將 Linked List 的 Head 改成第二個節點就可以了。
 
 ```js
-const shift = () => {
+function shift() {
   // 若沒有節點則回傳 null
   if (head === null)
     return null
@@ -164,7 +164,7 @@ const shift = () => {
 根據 index 來找值，與 array 不同的是，需要從第一個節點開始找，直到找到 index 指定的節點
 
 ```js
-const get = (index) => {
+function get(index) {
   // 若 index 大於 Linked List 長度或小於 0 則回傳 null
   if (index > length || index < 0)
     return null
@@ -186,7 +186,7 @@ const get = (index) => {
 在 head 前新增一個節點，並指定新節點為 head
 
 ```js
-const unshift = (value) => {
+function unshift(value) {
   // 建立新節點
   const newNode = Node(value)
   // 若已經有至少一個節點，則將新節點的 next 指向原本的 head
@@ -203,7 +203,7 @@ const unshift = (value) => {
 在某個 index 插入一個節點
 
 ```js
-const insertAt = (index, value) => {
+function insertAt(index, value) {
   // 若 index 大於長度或小於 0 則返回 null
   if (index > length || index < 0)
     return null
@@ -237,7 +237,7 @@ const insertAt = (index, value) => {
 刪除某個 index 的節點，邏輯跟 `insertAt` 很像，但是方法改使用 pop & shift。
 
 ```js
-const removeAt = (index) => {
+function removeAt(index) {
   if (index > length || index < 0)
     return null
   if (index === 0 || head === null)
