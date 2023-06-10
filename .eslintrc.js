@@ -10,6 +10,6 @@ module.exports = {
     'public',
     'coverage',
     '.nuxt',
-    'content',
+    'content/**/*.md',
   ],
 }
