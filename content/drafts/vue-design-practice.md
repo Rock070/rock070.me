@@ -10,7 +10,7 @@ Tree-Shaking 依賴 ESM 的靜態結構，所以想要實現 Tree-Shaking，就�
 
 常數可以在建構配置的檔案中設定，在 webpack 中是使用 definePluging 來定義：
 
-```js
+```javascript
 new webpack.DefinePlugin({
   '__DEV__': JSON.stringify(false),
   'PRODUCTION': JSON.stringify(true),
@@ -34,19 +34,19 @@ vue.runtime.esm-bundler.js 是給使用者使用 webpack、rollup 打包工具�
 todo: 兩者差異
 <!-- vue.esm-browser.js && vue.runtime.esm-bundler.js 兩者雖然都是 esm 格式，但因為使用方式不同，所以程式碼的寫法會不一樣。一般我們可以透過設置 `__DEV__` 為 true or false，來判斷是否為開發環境。但在提供給打包工具的情境下，是需要把 `__DEV__` 更換成 `process.env.NODE_ENV !== 'production'` 的。 -->
 
-```js
+```javascript
 // browser
 if (__DEV__)
   warn('useCssModule() is not supported in the global build')
 ```
 
-```js
+```javascript
 // bundler
 if (process.env.NODE_ENV !== 'production')
   warn('useCssModule() is not supported in the global build')
 ```
 
-```json
+```javascript
 main: "index.js",
 module: "dist/run.runtime.esm-bundler.js,
 ```
@@ -54,7 +54,7 @@ module: "dist/run.runtime.esm-bundler.js,
 
 針對不同的輸出都可以在 rollup 中設定
 
-```js
+```javascript
 // rollup.config.js
 const config = {
   input: 'input.js',

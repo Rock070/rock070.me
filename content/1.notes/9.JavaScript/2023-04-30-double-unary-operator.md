@@ -11,7 +11,7 @@ categories: [JavaScript]
 
 雙 NOT 運算符（~~）使用在數字上，結果相當於 Math.trunc()
 
-```js
+```javascript
 console.log(~~-1) // -1
 console.log(Math.trunc(-1))// -1
 console.log(~~0) // 0

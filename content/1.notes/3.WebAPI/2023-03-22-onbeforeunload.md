@@ -7,7 +7,7 @@ categories: [Web API]
 
 onbeforeunload 事件在即將離開當前頁面（刷新或關閉）時觸發。
 
-```js
+```javascript
 window.onbeforeunload = function (e) {
   const dialogText = 'Dialog text here'
   e.returnValue = dialogText

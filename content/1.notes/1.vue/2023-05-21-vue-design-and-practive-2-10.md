@@ -13,7 +13,7 @@ categories: [Vue]
 
 接下來要來設計，在 vue.js 當中經常用到的 API 「watch」，watch 本質就是觀測一個響應式數據，變且傳入一個回調函數，當修改響應式數據的值時，會觸發該回調函式執行，用來起來像這樣：
 
-```js [watch.js]
+```javascript [watch.js]
 watch(proxy, () => {
   console.log('值變了')
 })
@@ -24,7 +24,7 @@ proxy.age++
 
 跟 `computed` 很像，有了 `effectRegister` + `scheduler` 就可以拿來追蹤響應式數據的變化，與在其更新時使用調度器。如：
 
-```js [watch.js]
+```javascript [watch.js]
 // watch 函數接收兩個參數，source 是響應式數據，cb 是回調函數
 function watch(source, cb) {
   effectRegister(
@@ -55,7 +55,7 @@ proxy.foo++
 
 但這樣的問題是 watch 內「**硬編碼**」了 `proxy.age` 的屬性，為了讓 watch 函數有具有**通用性**，我們需要封裝一個通用的讀取操作：
 
-```js [watch.js]
+```javascript [watch.js]
 function traversal(value, seen = new Set()) {
   // 如果要讀取的數據是原始值，或者已經被讀取過了，那麼什麼都不做
   if (typeof value !== 'object' || value === null || seen.has(value))
@@ -92,7 +92,7 @@ proxy.age++
 
 watch 函數除了可以監測響應式數據，還可以接收一個 getter 函數：
 
-```js [watch.js]
+```javascript [watch.js]
 watch(
   // getter 函數
   () => proxy.age,
@@ -105,7 +105,7 @@ watch(
 
 傳遞給 watch 函數的第一個參數不再是一個響應式數據，而是一個 getter 函數。在 getter 函數內部，使用者可以指定該 watch 依賴哪些響應式數據，只有當這些數據變化時，才會觸發回調函數執行。
 
-```js [watch.js]
+```javascript [watch.js]
 function watch(source, cb) {
   let getter
   // 如果 source 是函數，說明使用者傳遞的是 getter，所以直接把 source 賦值給 getter
@@ -141,7 +141,7 @@ proxy.age++
 
 通常我們在使用 Vue.js 中的 watch 函數時，能夠在回調函數中得到變化前後的值：
 
-```js [watch.js]
+```javascript [watch.js]
 watch(
   () => proxy.age,
   (newValue, oldValue) => {
@@ -154,7 +154,7 @@ proxy.age++
 
 為了實現這個，我們可以透過 lazy 選項來，手動執行 effect 拿到 getter 回傳的值，並在每次 trigger 執行 scheduler 的時候，更新新值與舊值：
 
-```js [watch.js]
+```javascript [watch.js]
 function watch(source, cb) {
   let getter
 
@@ -203,7 +203,7 @@ proxy.age++
 
 預設情況下，一個 watch 的回調只會在響應式數據發生變化時才執行：
 
-```js [watch.js]
+```javascript [watch.js]
 // 回調函數只有在響應式數據 proxy 後續發生變化時才執行
 watch(proxy, () => {
   console.log('變化了')
@@ -212,7 +212,7 @@ watch(proxy, () => {
 
 在 Vue.js 中可以透過 options.immediate 來指定回調是否要立即執行：
 
-```js [watch.js]
+```javascript [watch.js]
 watch(obj, () => {
   console.log('變化了')
 }, {
@@ -225,7 +225,7 @@ watch(obj, () => {
 
 ::code-group
 
-```js [Before]
+```javascript [Before]
 function watch(source, cb, options = {}) {
   let getter
   let oldValue, newValue
@@ -248,7 +248,7 @@ function watch(source, cb, options = {}) {
 }
 ```
 
-```js [After]
+```javascript [After]
 function watch(source, cb, options = {}) {
   let getter
   let oldValue, newValue
@@ -284,7 +284,7 @@ function watch(source, cb, options = {}) {
 
 在 Vue.js 3 中 watch 可以使用 flush 選項來指定執行回調的時機
 
-```js [watch.js]
+```javascript [watch.js]
 watch(proxy, () => {
   console.log('變化了')
 }, {
@@ -301,7 +301,7 @@ flush 可指定的三個執行時機：
 
 當 flush 的值為 `post` 時，代錶調度函數需要將副作用函式放到一個**微任務隊列**中，並等待 DOM 更新結束後再執行，如以下程式碼為例：
 
-```js [watch.js]
+```javascript [watch.js]
 function watch(source, cb, options = {}) {
   let getter
   let oldValue, newValue

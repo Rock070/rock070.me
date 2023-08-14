@@ -34,7 +34,7 @@ effectFn
 
 [不完善的桶 - stackblitz](https://stackblitz.com/edit/js-266sve?file=index.js)
 
-```js
+```javascript
 /**
  * 副作用函式
  */
@@ -92,7 +92,7 @@ setTimeout(() => {
 
 [新的桶 - stackblitz](https://stackblitz.com/edit/js-nsw85h?file=index.js)
 
-```js
+```javascript
 /**
  * 副作用函式
  */
@@ -155,7 +155,7 @@ setTimeout(() => {
 
 主要原因是怕**記憶體流失（Memory Leak）**`，WeakMap` 具有較好的垃圾回收機制，這邊需要提一下 `WeakMap` & `Map` 的差異:
 
-```js [weak-map.js]
+```javascript [weak-map.js]
 const map = new Map()
 const weakMap = new WeakMap();
 (function () {
@@ -185,7 +185,7 @@ const weakMap = new WeakMap();
 
 [封裝 track, trigger 函數 - stackblitz](https://stackblitz.com/edit/js-c7ey4t?file=index.js)
 
-```js [track-trigger.js]
+```javascript [track-trigger.js]
 /**
  * 副作用函式
  */

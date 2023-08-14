@@ -61,7 +61,7 @@ Vue.js 在打包之後會有兩個產物，一個是開發環境用的，如：v
 
 因為一個良好的框架就應該減少程式碼的體積，但為了提高 DX 時，多了很多 warn 的警告訊息，卻與減少程式碼的原則衝突了。所以在 Vue.js 中的 warning 會有一個 `if (__DEV__)` 的判斷，`__DEV__`就是透過 rollup 的插件 [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace#readme)，在打包的時候靜態分析這段字串，並取代為設定檔內的宣告，如：判斷環境，並將其取代為布林值，若為 `true` 就是在開發環境，`false` 是在生產環境。
 
-```js [rollup.config.js]
+```javascript [rollup.config.js]
 import replace from '@rollup/plugin-replace'
 
 export default {
@@ -82,7 +82,7 @@ export default {
 
 這是未打包的原始碼
 
-```js [vue.js]
+```javascript [vue.js]
 if (__DEV__ && !res) {
   warn(
     `Failed to mount app: mount target selector "${container}" returned null.`)
@@ -91,7 +91,7 @@ if (__DEV__ && !res) {
 
 打包後開發環境的程式碼
 
-```js [vue.global.js]
+```javascript [vue.global.js]
 if (true && !res) {
   warn(
     `Failed to mount app: mount target selector "${container}" returned null.`)
@@ -100,7 +100,7 @@ if (true && !res) {
 
 打包後生產環境的程式碼
 
-```js [vue.global.js]
+```javascript [vue.global.js]
 if (false && !res) {
   warn(
     `Failed to mount app: mount target selector "${container}" returned null.`)
@@ -148,7 +148,7 @@ Vue 打包後，可以看到有非常多產出
 
 在 vue 的 index.js 中，有以下程式碼，透過 `process.env.NODE_ENV === 'production'` 來區分使用哪個環境的打包產物。
 
-```js [index.js]
+```javascript [index.js]
 if (process.env.NODE_ENV === 'production')
   module.exports = require('./dist/vue.cjs.prod.js')
 
@@ -157,7 +157,7 @@ else
 ```
 
 另外，如何區分不同的模組規範？其實一般 package.json中的 main 和 module 来指定的
-```json [package.json]
+```javascript [package.json]
 {
   "main": "index.js",
   "module": "dist/vue.runtime.esm-bundler.js" // rollup, webpack 打包工具，會優先使用 module
@@ -181,7 +181,7 @@ else
 
 IIFE 結構
 
-```js [vue.global.js]
+```javascript [vue.global.js]
 const Vue = (function (exports) {
   // ...
   exports.createApp = createApp
@@ -192,7 +192,7 @@ const Vue = (function (exports) {
 
 rollup.js 設定方式
 
-```js [rollup.config.js]
+```javascript [rollup.config.js]
 const config = {
   input: 'input.js',
   output: {
@@ -222,7 +222,7 @@ export default config
 
 但在 `-bundler` 中，`__DEV__` 會變成 `process.env.NODE_ENV === 'production'`
 
-```json [package.json]
+```javascript [package.json]
 {
   "main": "index.js",
   "module": "dist/vue.runtime.esm-bundler.js" // 打包工具 rollup, webpack 會優先使用 module
@@ -235,7 +235,7 @@ export default config
 
 `vue.cjs.js"`
 
-```js [rollup.config.js]
+```javascript [rollup.config.js]
 const config = {
   input: 'input.js',
   output: {
@@ -255,7 +255,7 @@ export default config
 
 主要是因為這一段的 rollup 設定：
 
-```js [rollup.config.js]
+```javascript [rollup.config.js]
 {
   __FEATURE_OPTIONS_API__: isBundlerESMBuild ? '__VUE_OPTIONS_API__' : 'true'
 }
@@ -263,7 +263,7 @@ export default config
 
 下面是一個有此判斷的原始碼範例：
 
-```js [component.ts]
+```javascript [component.ts]
 // support for 2.x options
 
 if (__FEATURE_OPTIONS_API__ && !(__COMPAT__ && skipOptions)) {
@@ -277,7 +277,7 @@ if (__FEATURE_OPTIONS_API__ && !(__COMPAT__ && skipOptions)) {
 
 在 ES Module 且有 -bundler 字樣的打包產物中，會被編譯為下面這樣：
 
-```js [component.js]
+```javascript [component.js]
 // support for 2.x options
 
 if (__VUE_OPTIONS_API__ && !(__COMPAT__ && skipOptions)) {
@@ -291,7 +291,7 @@ if (__VUE_OPTIONS_API__ && !(__COMPAT__ && skipOptions)) {
 
 使用者就可以在打包工具裡面去宣告開關，如：
 
-```js [vite.config.js]
+```javascript [vite.config.js]
 export default {
   define: {
     __VUE_OPTIONS_API__: false // 這一行

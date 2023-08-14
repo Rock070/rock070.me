@@ -22,7 +22,7 @@ categories: [Vue]
 
 ::code-group
 
-```js [懶執行]
+```javascript [懶執行]
 effectRegister(
   // 指定了 lazy 選項，這個函數不會立即執行
   () => {
@@ -34,7 +34,7 @@ effectRegister(
 )
 ```
 
-```js [立即執行]
+```javascript [立即執行]
 effectRegister(
   // 這個函數會立即執行
   () => {
@@ -49,7 +49,7 @@ effectRegister(
 
 有了 lazy 參數的傳入，就可以在 `effectRegister` 來實現了，透過判斷 `options.lazy` 參數，決定要不要再註冊副作用函式的時候，就立即執行一次。
 
-```js [effectRegister.js]
+```javascript [effectRegister.js]
 function effectRegister(fn, options = {}) {
   const effectFn = () => {
     cleanup(effectFn)
@@ -77,7 +77,7 @@ function effectRegister(fn, options = {}) {
 
 接下來重新執行一次 `effectRegister` 來測試看看，可以看到有 `lazy: true` 的不會執行，沒有設定懶執行的會立即執行，最終印出「Run Not lazy: 1」。
 
-```js [effectRegister.js]
+```javascript [effectRegister.js]
 effectRegister(
   () => {
     console.log('Run Lazy: ', proxy.age)
@@ -104,7 +104,7 @@ effectRegister(() => {
 
 答案就是可以拿著 return 出來的 `effectFn` 自己**手動執行**，所以就會印出「Run Lazy: 1」、「Run Not lazy: 1」。
 
-```js [effectRegister.js]
+```javascript [effectRegister.js]
 const effectFn = effectRegister(
   () => {
     console.log('Run Lazy: ', proxy.age)
@@ -133,7 +133,7 @@ effectFn()
 
 但只有手動執行意義不大，讓我們把傳給 `effectRegister` 的函數當作一個 getter，這個 getter 函數可以返回任何值，例如：
 
-```js [effectRegister.js]
+```javascript [effectRegister.js]
 const effectFn = effectRegister(
   () => {
     return proxy.age + 22
@@ -153,7 +153,7 @@ console.log(value)
 
 其實實現起來很簡單，只需要把 `fn` 的返回值在 `effectFn` 返回就好了。
 
-```js [effectRegister.js]
+```javascript [effectRegister.js]
 function effectRegister(fn, options = {}) {
   const effectFn = () => {
     cleanup(effectFn)
@@ -189,7 +189,7 @@ function effectRegister(fn, options = {}) {
 
 有了「getter 返回值」+「lazy」手動執行的特性之後，我們就可以開始封裝 `computed` 了
 
-```js [computed.js]
+```javascript [computed.js]
 function computed(fn) {
   const effectFn = effectRegister(fn, {
     lazy: true,
@@ -221,7 +221,7 @@ console.log(sumRefs.value)
 
 在下面實作的程式碼中，若 `console.log(sumRef.value)` 兩次，`getter` 函數只會執行一次。
 
-```js [computed-cache-dirty.js]
+```javascript [computed-cache-dirty.js]
 function computed(fn) {
   let cacheValue
   let dirty = true
@@ -275,7 +275,7 @@ console.log(sumRefs.value)
 如我們使用 `registerRegister` 打印 `computed` 回傳的 `sumRefs`，但按照目前的實現，當 `computed` getter 收集的 `proxy.age` 改變時，並不會觸發 `effectRegister` 的副作用函式執行，這樣用起來就不夠方便，因為我們希望 `computed` 的變更也會被 `effectRegister` 一起 track & trigger，因此，我們需要來解決這個問題。
 
 
-```js [computed.js]
+```javascript [computed.js]
 const sumRefs = computed(() => {
   return proxy.age + 22
 })
@@ -293,7 +293,7 @@ proxy.age++
 
 要解決這個問題，我們只需要在 `computed` 內部在 obj 被讀取時使用 `track`，在響應式數據改變時，在 scheduler 觸發 `trigger`。
 
-```js [computed.js]
+```javascript [computed.js]
 function computed(fn) {
   let cacheValue
   let dirty = true
@@ -326,7 +326,7 @@ function computed(fn) {
 
 如此一來，以之前的範例來說，當 computed 內部響應式數據 `proxy.age` 被改變後，也同時會觸發 `effectRegister` 傳入的副作用函式 `() => { console.log(sumRefs.value) }`。當我們執行 `proxy.age++` 時，再次打印出 `sumRefs.value`，也就是「24」。
 
-```js [computed.js]
+```javascript [computed.js]
 const sumRefs = computed(() => {
   return proxy.age + 22
 })

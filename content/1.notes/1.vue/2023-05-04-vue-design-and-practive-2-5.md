@@ -13,7 +13,7 @@ categories: [Vue]
 
 當 effectRegister 註冊內包了一個 effectRegister，就是所謂的巢狀
 
-```js [nested.js]
+```javascript [nested.js]
 effectRegister(() => {
   effectRegister(() => { /* ... */ })
   /* ... */
@@ -22,7 +22,7 @@ effectRegister(() => {
 
 在 Vue.js 內可以看作是父元件包著子元件，Foo 元件內要渲染 Bar 元件
 
-```js [nested-vue.js]
+```javascript [nested-vue.js]
 // Bar 元件
 const Bar = {
   render() { /* ... */ },
@@ -37,7 +37,7 @@ const Foo = {
 
 相當於
 
-```js [nested-vue.js]
+```javascript [nested-vue.js]
 effectRegister(() => {
   Foo.render()
   // 巢狀
@@ -53,7 +53,7 @@ effectRegister(() => {
 
 [收集錯誤的巢狀 effect - stackblitz](https://stackblitz.com/edit/js-hkvqta?file=index.js)
 
-```js [effect.js]
+```javascript [effect.js]
 effectRegister(() => {
   console.log('effectRegister 1')
   effectRegister(() => {
@@ -70,7 +70,7 @@ setTimeout(() => {
 
 在 `effectRegister` 第一層打印 `effectRegister 1`，第二層打印 `effectRegister 2`，原本預期當 setTimeout 2 秒後，更改 `proxy.text`，會執行 effectRegister 第一層，印出 `effectRegister 1`，但結果不如預計，會印出 `effectRegister 2`：
 
-```js []
+```javascript []
 'effectRegister 1'
 'effectRegister 2'
 'effectRegister 2'
@@ -78,7 +78,7 @@ setTimeout(() => {
 
 這個問題的原因是源於 activeEffect 的設計，是單一個變數，所以當 effectRegister 第二層執行的時候， activeEffect 就被覆寫了，所以當 `proxy.text` 被 track 的時候，就會收集到第二層的 effectRegister。
 
-```js
+```javascript
 /**
  * 副作用函式
  */
@@ -118,7 +118,7 @@ function effectRegister(fn) {
 
 依照 stack 的**後進先出**的設計，就可以解決**巢狀執行帶來被覆寫的問題**。
 
-```js
+```javascript
 /**
  * 副作用函式
  */
@@ -153,7 +153,7 @@ function effectRegister(fn) {
 
 [activeEffectStack - stackblitz](https://stackblitz.com/edit/js-qdaeco?file=index.js)
 
-```js [effect-stack.js]
+```javascript [effect-stack.js]
 /**
  * 副作用函式
  */

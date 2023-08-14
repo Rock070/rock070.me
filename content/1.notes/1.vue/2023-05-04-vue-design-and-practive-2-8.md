@@ -13,7 +13,7 @@ categories: [Vue]
 
 以下面的例子來說，副作用會先執行一次，然後在 `proxy.age` 被更改的時候觸發副作用執行，所以會打印出 1, 2, 3。
 
-```js [case.js]
+```javascript [case.js]
 const data = { age: 1 }
 const proxy = new Proxy(data, { /* ... */ })
 
@@ -33,7 +33,7 @@ proxy.age++
 
 因此我們需要建立一個**任務隊列 jobQueue**，創建一個 **promise 微任務隊列（MicroTask Queue**），並使用 **flushJob** 來刷新任務隊列，用 **isFlushing** 來表示當前是否在執行任務隊列。
 
-```js [jobQueue.js]
+```javascript [jobQueue.js]
 const jobQueue = new Set()
 
 const p = Promise.resolve()
@@ -83,7 +83,7 @@ proxy.age++
 
 [jobQueue 任務隊列 - stackblitz](https://stackblitz.com/edit/js-hepk1j?file=index.js)
 
-```js [jobQueue.js]
+```javascript [jobQueue.js]
 /**
  * 副作用函式
  */

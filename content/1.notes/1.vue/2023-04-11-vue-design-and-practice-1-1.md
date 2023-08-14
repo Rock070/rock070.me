@@ -86,7 +86,7 @@ Vue.js 幫我們封裝了「過程」，讓我們用「聲明」的方式即可�
 
 在命令式中的作法，因為明確知道要修改的目標是什麼，可以直接用相關命令去修改文字即可。
 
-```js
+```javascript
 document.querySelector('.about').textContent = 'Hello Mike'
 ```
 
@@ -143,7 +143,7 @@ document.querySelector('.about').textContent = 'Hello Mike'
 
 且 innerHTML 在面對儘管是一個文字的改變，都會需要銷毀所有的 DOM，再新建所有新的 DOM，當模板很大的時候，會造成非常大的效能損耗。
 
-```js
+```javascript
 document.querySelector('.about').innerHTML = `
   <ul>
     <li data-pid="3qvuZhSf">命令式編程（imperative）：詳細描述路徑</li>
@@ -173,7 +173,7 @@ document.querySelector('.about').innerHTML = `
 
 使用命令式來操作 DOM，效能最高，但寫出來的程式碼可讀性與可維護度較低。
 
-```js
+```javascript
 document.querySelector('.about').textContent = 'Hello Mike'
 ```
 

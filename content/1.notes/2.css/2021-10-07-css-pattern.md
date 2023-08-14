@@ -351,7 +351,7 @@ div {
 
 React 社群推出的 [styled-component](https://styled-components.com/)，將 CSS 寫在 component 內，達到 CSS in JS 的作用，可以很直接的接收元件的 props 來控制 CSS，透過這樣的方式可以做到讓 CSS 狀態控制變得更彈性。
 
-```javascript=
+```javascript
 const Button = styled.button`
   background: ${props => props.primary ? "palevioletred" : "white"};
   color: ${props => props.primary ? "white" : "palevioletred"};

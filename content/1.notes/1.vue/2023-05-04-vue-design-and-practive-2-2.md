@@ -16,14 +16,14 @@ categories: [Vue]
 
 ::code-group
 
-  ```js [Before]
+  ```javascript [Before]
   function effect() {
     console.log('effect run')
     document.body.innerText = proxy.text
   }
   ```
 
-  ```js [After]
+  ```javascript [After]
   // 副作用函式
   let activeEffect
 
@@ -47,7 +47,7 @@ categories: [Vue]
 
 ::code-group
 
-```js [Before]
+```javascript [Before]
 const proxy = new Proxy(data, {
   get(target, key) {
     bucket.add(effect) // 舊版直接拿 effect 收集進桶中
@@ -62,7 +62,7 @@ const proxy = new Proxy(data, {
 })
 ```
 
-```js [After]
+```javascript [After]
 const proxy = new Proxy(data, {
   get(target, key) {
     if (activeEffect)
@@ -85,7 +85,7 @@ const proxy = new Proxy(data, {
 
 [effect 改為 effect 註冊器 - stackblitz](https://stackblitz.com/edit/js-wzmhdt?file=index.js)
 
-```js
+```javascript
 /**
  * 副作用函式
  */

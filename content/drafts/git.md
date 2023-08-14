@@ -96,7 +96,7 @@ Date:   Fri Jun 10 09:54:17 2022 +0800
 
 下面是可以選用的類型：
 
-```js
+```javascript
 feat: 新功能
 fix: 修正 bug
 docs :文件內容修改
@@ -281,7 +281,7 @@ npm install -D standard-version
 package.json
 ``
 
-```json
+```javascript
 "scripts": {
  "release": "standard-version"
 },

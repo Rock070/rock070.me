@@ -17,7 +17,7 @@ categories: [Vue]
 
 [副作用遺留 - stackblitz](https://stackblitz.com/edit/js-m7rv8n?file=index.js)
 
-```js [effect.js]
+```javascript [effect.js]
 const data = { ok: true, text: 'hello world' }
 const proxy = new Proxy(data, { /* ... */ })
 effect(() => {
@@ -56,7 +56,7 @@ setTimeout(() => {
 
 effectFn 需要擴充一個屬性 `deps: Set[]`，在屬性讀取並 track 時，將 effectFn Set 收集，cleanup 執行時，去所有桶子內清除當前相關的 effectFn。
 
-```js [clean-up.js]
+```javascript [clean-up.js]
 function cleanup(effectFn) {
   for (let i = 0; i < effectFn.deps.length; i++) {
     effectFn.deps[i].forEach((i) => {
@@ -70,7 +70,7 @@ function cleanup(effectFn) {
 
 #### 2. 在 effectRegister 內封裝 effectFn
 
-```js [effectRegister.js]
+```javascript [effectRegister.js]
 let activeEffect
 
 function effectRegister(fn) {
@@ -95,7 +95,7 @@ function effectRegister(fn) {
 
 在 track 函式內新增收集 `activeEffect.deps.push(deps)`
 
-```js [track.js]
+```javascript [track.js]
 function track(target, key) {
   if (!activeEffect)
     return
@@ -136,7 +136,7 @@ Each value is normally visited only once. However, a value will be revisited if 
 
 簡單以程式碼實現無限迴圈會是這樣：
 
-```js [infinity-loop.js]
+```javascript [infinity-loop.js]
 const set = new Set([1])
 
 const newSet = new Set(set)
@@ -153,7 +153,7 @@ newSet.forEach((item) => {
 
 effect Set 迴圈執行 -> cleanup -> 副作用函式 -> track -> 重新收集進 effect Set -> 因為 effect Set 迴圈還沒結束就重新收集 -> 無限迴圈
 
-```js [trigger.js]
+```javascript [trigger.js]
 function trigger(target, key) {
   /**
    * ...
@@ -164,7 +164,7 @@ function trigger(target, key) {
 
 解決辦法很簡單，就是在 trigger 內創建一個新的 Set 集合 `effectToRun` 遍歷。
 
-```js [trigger.js]
+```javascript [trigger.js]
 function trigger(target, key) {
   /**
    * ...
@@ -179,7 +179,7 @@ function trigger(target, key) {
 
 [完整程式碼 - stackblitz](https://stackblitz.com/edit/js-desqvb?file=index.js)
 
-```js
+```javascript
 /**
  * 副作用函式
  */

@@ -15,7 +15,7 @@ categories: [Vue]
 
 如這個範例：
 
-```js [infinity.js]
+```javascript [infinity.js]
 const data = { foo: 1 }
 const proxy = new Proxy(data, { /* ... */ })
 
@@ -24,7 +24,7 @@ effectRegister(() => proxy.foo++)
 
 可以看到在 effectRegister 註冊的副作用函式，有一個複寫自己的操作，會導致 stack overflow
 
-```terminal
+```shell
 Uncaught RangeError: Maximum call stack size exceeded
 ```
 
@@ -41,7 +41,7 @@ Uncaught RangeError: Maximum call stack size exceeded
 
 因為這樣的問題，所以導致無限遞迴的發生，需要避免這個問題，就需要建立一個防衛機制，如果 trigger 觸發執行的副作用函式，與當前正在執行的 activeEffect 副作用函式相同，則不觸發執行
 
-```js [trigger.js]
+```javascript [trigger.js]
 effects && effects.forEach((effectFn) => {
 // 如果 trigger 觸發執行的副作用函式與當前正在執行的副作用函式相同，则不觸發執行
   if (effectFn !== activeEffect) { // 新增
@@ -55,7 +55,7 @@ effectsToRun.forEach(effectFn => effectFn())
 
 [避免無限遞迴 - stackblitz](https://stackblitz.com/edit/js-hdu8cr?file=index.js)
 
-```js [infinity.js]
+```javascript [infinity.js]
 /**
  * 副作用函式
  */

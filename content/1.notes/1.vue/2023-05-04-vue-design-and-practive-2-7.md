@@ -19,7 +19,7 @@ categories: [Vue]
 
 使用起來大概會長像這樣，在 `effectRegister` 的第二個參數傳入一個 `options` 的物件，物件內包含屬性 **scheduler**。 在 trigger 的時候，取代 effectFn，執行 scheduler，如使用 setTimeout 來延後執行副作用函式。
 
-```js
+```javascript
 effectRegister(
   () => {
     console.log(proxy.age)
@@ -42,7 +42,7 @@ effectRegister(
 
 在 `effectRegister` 註冊副作用函式的時候，把 options 也存在 effectFn 上一起被 track 函示收集。
 
-```js [effectRegister.js]
+```javascript [effectRegister.js]
 function effectRegister(fn, options = {}) {
   const effectFn = () => {
     cleanup(effectFn)
@@ -66,7 +66,7 @@ function effectRegister(fn, options = {}) {
 
 在 `trigger` 函式執行的時候將執行 effectFn 取代為執行將 effectFn 當作參數傳入的 scheduler。
 
-```js [trigger.js]
+```javascript [trigger.js]
 function trigger(target, key) {
   const effects = bucket.get(target)?.get(key)
   const effectToRun = new Set()
@@ -93,7 +93,7 @@ function trigger(target, key) {
 
 這是一個尚未實作調度器前的應用：
 
-```js [case.js]
+```javascript [case.js]
 const data = { age: 1 }
 const proxy = new Proxy(data, { /* ... */ })
 
@@ -112,7 +112,7 @@ console.log('结束了')
 
 按照目前的實作，會按照順序打印：
 
-```js
+```javascript
 1
 2
 結束了
@@ -120,7 +120,7 @@ console.log('结束了')
 
 但如果今天想要改變打印順序，變為：
 
-```js
+```javascript
 1
 結束了
 2
@@ -128,7 +128,7 @@ console.log('结束了')
 
 就可以使用 scheduler 調度器來延後第二次副作用函式的執行，讓「結束了」先打印出來：
 
-```js [case.js]
+```javascript [case.js]
 const data = { age: 1 }
 const proxy = new Proxy(data, { /* ... */ })
 
@@ -156,7 +156,7 @@ console.log('结束了')
 
 [scheduler 調度器 - stackblitz](https://stackblitz.com/edit/js-utfxu7?file=index.js)
 
-```js [scheduler.js]
+```javascript [scheduler.js]
 /**
  * 副作用函式
  */

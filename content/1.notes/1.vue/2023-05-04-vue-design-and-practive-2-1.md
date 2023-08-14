@@ -15,7 +15,7 @@ categories: [Vue]
 
 副作用函式指的是函式的執行會直接或間接影響到其他函數的執行，就可以說此函數產生了副作用，如下面這個範例，effect 函數修改了全域變數 val，因為 val 也可能會被其他函式引用，effect 的執行影響到了其他函數的執行結果，所以 effect 就是副作用函式。
 
-```js [effect.js]
+```javascript [effect.js]
 let val = 1
 
 function effect() {
@@ -39,7 +39,7 @@ function getVal() {
 
 例如下面的 effect 函式中，`document.body.innerText = obj.text` 讀取了 `obj.text`，所以當 `obj.text` 更改後，預期要重新執行一次 `document.body.innerText = obj.text` 這個副作用程式碼。
 
-```js [effect.js]
+```javascript [effect.js]
 const obj = { text: 'hello world' }
 function effect() {
   // effect 函式的執行會讀取 obj.text
@@ -68,7 +68,7 @@ function effect() {
 1. 宣告一個副作用桶子 `const bucket = new Set()`，專門收集副作用。
 2. 宣告一個攔截器 `new Proxy`，在讀取與設值時攔截，並在 proxy 被**讀取時把 effect 收集進 bucket 桶子中**，在被**設值時把 bucket 用 forEach 執行一遍**
 
-```js [effect.js]
+```javascript [effect.js]
 const proxy = new Proxy(data, {
   get(target, key) {
     bucket.add(effect) // 讀取時收集副作用
@@ -92,7 +92,7 @@ const proxy = new Proxy(data, {
 
 [簡單實現響應式資料 - stackblitz](https://stackblitz.com/edit/js-wd154u?file=index.js)
 
-```js
+```javascript
 // 副作用函式
 function effect() {
   document.body.innerText = proxy.text
