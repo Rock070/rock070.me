@@ -261,8 +261,6 @@ instance.appContext.config.globalProperties.$router = useRoute();
 
 每次上傳版本號都不能一樣
 
-### 工作坊總結
-
 ## 總結
 
 整體來說此次的 Conf 有學習到東西，也有認識到新朋友，甚至還遇到了前同事，都聊了很多，我想這也是參加 Conference 的大優點吧！
