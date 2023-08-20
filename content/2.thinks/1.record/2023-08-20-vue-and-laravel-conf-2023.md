@@ -5,7 +5,7 @@ description: 紀錄參加 Laravel Vue Conf 2023 心得
 categories: 生活紀錄
 ---
 
-這是我第一次參加 Laravel & Vue Conf，與之前參加的 conference 不太一樣的是，以往的範圍都是涉及軟體開發的大範圍，如：前端、後端、DevOps、UI/UX、PM、職涯規劃等等，這次比較限縮在前端的 Vue.js 框架 & PHP Laravel 框架。
+這是我第一次參加 [Laravel & Vue Conf](https://laravelconf.tw/agendas)，與之前參加的 conference 不太一樣的是，以往的範圍都是涉及軟體開發的大範圍，如：前端、後端、DevOps、UI/UX、PM、職涯規劃等等，這次比較限縮在前端的 Vue.js 框架 & PHP Laravel 框架。
 
 這次難得邀請到了 Vue 的創造者**尤雨溪**大大，所以肯定要買票進場支援的 XDD。
 
@@ -13,7 +13,7 @@ categories: 生活紀錄
 
 ## 本次議程
 
-<!-- <img src="https://i.imgur.com/K4QHa3Q.jpg" height="100" width="100" style="width:85%;display:flex;justify-content:center;margin:auto;"/> -->
+<img src="https://i.imgur.com/K4QHa3Q.jpg" height="100" width="100" style="width:85%;display:flex;justify-content:center;margin:auto;"/>
 
 ## 重新發明 Vue：經驗與教訓 - 尤雨溪
 
@@ -124,7 +124,7 @@ Vue 3.0 發佈，但相關的配套措施尚未完善，如
 
 在下午茶時段的時候，看到在排隊拍照，因為隊伍剛形成還沒有很多人，就趕快加入隊伍中等待拍照 XDD
 
-<!-- <img src="https://i.imgur.com/lzOHOz5.jpg" height="100" width="100" style="width:30%;display:flex;justify-content:center;margin:auto;"/> -->
+<img src="https://i.imgur.com/lzOHOz5.jpg" height="100" width="100" style="width:30%;display:flex;justify-content:center;margin:auto;"/>
 
 ## 被 Vue 框架耽誤的建構工具 - Vite - 高見龍
 
@@ -170,6 +170,12 @@ instance.appContext.config.globalProperties.$router = useRoute();
 另外就是與其使用 nvm 來切各個專案，不如使用工具 `remote develop` 設定好各個專案的 docker 環境 + init CLI，讓 code reviewer 或是新成員，可以更簡單、快速的啟動專案。
 
 ## 工作坊：使用 Vue3！自己的 UI Framework 自己做
+
+工作坊主要目的就是讓學員分組可以製作一個開源專案，並且發佈到 npm 上，但是時間有限，我跟組員共同開發了一個 [vue3-noti](https://www.npmjs.com/package/vue3-noti) 的套件，是想要嘗試做自己的 Vue3 toast 元件，但是時間真的不太夠，不到一個小時的時間，我們使用 live share extension 共同在我的電腦上的 main 分支共同開發，第一次五個人一起用，沒想到居然沒啥問題，超讚的！
+
+最後因為時間問題，連功能都沒寫完，就急著先發佈了，然後就下課了 XD，所以現在安裝基本上是完全不能用的 XDD，之後有機會來重新製作一個！
+
+接下來是筆記：
 
 ### 前期計畫
 
@@ -254,6 +260,8 @@ instance.appContext.config.globalProperties.$router = useRoute();
 上傳：npm publish
 
 每次上傳版本號都不能一樣
+
+### 工作坊總結
 
 ## 總結
 
