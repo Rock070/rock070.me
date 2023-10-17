@@ -19,4 +19,4 @@ window.onbeforeunload = function (e) {
 
 <img src="https://i.imgur.com/wjf32Dp.png" width="50%" style="marginLeft:auto; marginRight:auto;" />
 
-原本可以根據 return 的字串自定義一些提示訊息，與標准信息一起顯示在對話框，但在 [2016 年 4 月 chrome 版本 51]([https://developer.chrome.com/blog/chrome-51-deprecations/#remove-custom-messages-in-onbeforeunload-dialogs](https://developer.chrome.com/blog/chrome-51-deprecations/#remove-custom-messages-in-onbeforeunload-dialogs)) 開始就不能改了，因為官方認為會成為一個有心人士「詐騙」的方法。
+原本可以根據 return 的字串自定義一些提示訊息，與標准信息一起顯示在對話框，但在 [2016 年 4 月 chrome 版本 51](https://developer.chrome.com/blog/chrome-51-deprecations/#remove-custom-messages-in-onbeforeunload-dialogs) 開始就不能改了，因為官方認為會成為一個有心人士「詐騙」的方法。
