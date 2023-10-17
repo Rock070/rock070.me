@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { defineNuxtConfig } from 'nuxt/config'
 import svgLoader from 'vite-svg-loader'
 
@@ -14,10 +15,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // Public keys that are exposed to the client
     public: {
-      baseUrl: process.env.BASE_URL,
+      baseUrl: process.env.NUXT_PUBLIC_BASE_URL,
       algolia: {
-        applicationId: process.env.ALGOLIA_APPLICATION_ID,
-        apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
+        applicationId: process.env.NUXT_PUBLIC_ALGOLIA_APPLICATION_ID,
+        apiKey: process.env.NUXT_PUBLIC_ALGOLIA_SEARCH_API_KEY,
         lang: 'zh-Hant-TW',
         langAttribute: 'lang',
         docSearch: {
@@ -92,11 +93,11 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:url',
-          content: process.env.BASE_URL,
+          content: process.env.NUXT_PUBLIC_BASE_URL,
         },
         {
           property: 'og:image',
-          content: process.env.BASE_URL && `${process.env.BASE_URL}/og-images/og-Rock070.png`,
+          content: process.env.NUXT_PUBLIC_BASE_URL && `${process.env.NUXT_PUBLIC_BASE_URL}/og-images/og-Rock070.png`,
         },
         {
           property: 'og:type',
@@ -116,11 +117,11 @@ export default defineNuxtConfig({
         },
         {
           name: 'twitter:image',
-          content: process.env.BASE_URL && `${process.env.BASE_URL}/og-images/og-Rock070.png`,
+          content: process.env.NUXT_PUBLIC_BASE_URL && `${process.env.NUXT_PUBLIC_BASE_URL}/og-images/og-Rock070.png`,
         },
         {
           name: 'twitter:site',
-          content: process.env.BASE_URL,
+          content: process.env.NUXT_PUBLIC_BASE_URL,
         },
         {
           name: 'twitter:creator',

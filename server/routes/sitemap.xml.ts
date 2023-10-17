@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   // Fetch all documents
   const docs = await serverQueryContent(event).find()
   const sitemap = new SitemapStream({
-    hostname: process.env.BASE_URL,
+    hostname: process.env.NUXT_PUBLIC_BASE_URL,
   })
 
   for (const doc of docs) {
