@@ -36,6 +36,12 @@ function transform(data: MyCustomParsedContent[]) {
     })
 }
 
+const IGNORE_PATH = [
+  '/',
+  '/all-posts',
+  '/categories',
+]
+
 function useGetAllPublishedCategoriesPosts() {
   const contentQuery = queryContent()
 
@@ -46,7 +52,7 @@ function useGetAllPublishedCategoriesPosts() {
       .find()
       .then((res) => {
         // 過濾草稿、空文章、首頁
-        const posts = res.filter(item => !item.draft && !item._empty && item._path !== '/')
+        const posts = res.filter(item => !item.draft && !item._empty && !IGNORE_PATH.includes(item._path))
 
         return posts as MyCustomParsedContent[]
       })

@@ -36,6 +36,12 @@ function transform(data: MyCustomParsedContent[]) {
     })
 }
 
+const IGNORE_PATH = [
+  '/',
+  '/all-posts',
+  '/categories',
+]
+
 function useGetAllPublishedPosts() {
   const contentQuery = queryContent()
 
@@ -44,8 +50,9 @@ function useGetAllPublishedPosts() {
     .sort({ date: -1 })
     .find()
     .then((res) => {
-      // 過濾草稿、空文章、首頁
-      const posts = res.filter(item => !item.draft && !item._empty && item._path !== '/')
+      // 過濾草稿、空文章、首頁、所有文章、標籤分類
+
+      const posts = res.filter(item => !item.draft && !item._empty && !IGNORE_PATH.includes(item._path))
 
       return posts as MyCustomParsedContent[]
     })
